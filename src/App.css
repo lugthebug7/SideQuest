@@ -1,22 +1,24 @@
 .App {
-  position: relative;
-  background-color: #FEF5D6; /* Change the color as needed */
+    position: relative;
+    background-color: #FEF5D6; /* Change the color as needed */
 }
 
 @font-face {
-  font-family: 'VT323';
-  src: url('../public/fonts/VT323-Regular.ttf') format('truetype'),
-       url('../public/fonts/VT323-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'VT323';
+    src: url('../public/fonts/VT323-Regular.ttf') format('truetype'),
+    url('../public/fonts/VT323-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    margin: 0;
+    font-family: 'VT323', monospace;
 }
+input, textarea, select, button {
+    font-family: inherit; /* This will force inputs to inherit the font-family from the body */
+}
+
 
 .vertical-rectangle-left-teal {
     position: absolute;
@@ -42,41 +44,149 @@ body {
 }
 
 .vertical-rectangle-right-brown {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 85vw; /* Adjust the width to your preference */
-  height: 100vh;
-  background-color: #FEF5D6; /* Change the color as needed */
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 85vw; /* Adjust the width to your preference */
+    height: 100vh;
+    background-color: #FEF5D6; /* Change the color as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers children vertically in the container */
+    align-items: center; /* Aligns children to the start of the cross axis */
+
+}
+
+.wrapper-container {
+    height: auto;
+    width: 60vw;
+}
+
+.upper-container {
+    flex-grow: 1;
+    display: flex;
+
+}
+
+.upper-left-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.upper-left-container-top {
+    flex-grow: 2; /* Takes 2/3 of the space */
+
+}
+
+.logo-image-container {
+    width: 100%; /* Full width of the container */
+    height: 100%;
+    overflow: hidden; /* Ensures that the image is cropped to the container */
+
+    display: flex; /* Use flexbox for centering */
+    justify-content: flex-start; /* Center horizontally */
+    align-items: center;
+
+}
+
+.logo-image-container img {
+    border: 7px solid #000;
+    width: 90%; /* Full width of the container */
+
+
 }
 
 
-.scene-image {
-  max-width: 25%; /* Makes sure the image is not larger than its container */
-  height: auto; /* Keeps the image aspect ratio */
+
+.upper-left-container-bottom {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 50px;
+    margin-top: 20px
+
 }
+
+.login-form-container {
+}
+
+.upper-right-container {
+    width: 100vw;
+    flex-grow: 1; /* Occupies half of the upper container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slogan {
+    color: #000;
+    text-align: right;
+    font-family: 'VT323', monospace;
+    font-size: 170px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.slogan-rectangle {
+    width: 30vw;
+    height: 70vh;
+}
+
+
 
 .main-content h1 {
-  font-size: 3em; /* Adjust the size as needed */
-  color: #000; /* Adjust the color as needed */
-  text-transform: uppercase; /* Optional: makes the text uppercase */
-  /* Add more styling as needed */
+    font-size: 3em; /* Adjust the size as needed */
+    color: #000; /* Adjust the color as needed */
+    text-transform: uppercase; /* Optional: makes the text uppercase */
+    /* Add more styling as needed */
 }
 
 .login-form {
-  display: flex;
-  flex-direction: column;
-  max-width: 300px; /* Adjust as needed */
-  margin: auto; /* Centers the form */
+    display: flex;
+    flex-direction: column;
+    max-width: 300px; /* Adjust as needed */
+    margin: auto; /* Centers the form */
 }
 
 .login-form input,
 .login-form button {
-  margin-bottom: 10px; /* Space out the form elements */
+    margin-bottom: 15px; /* Space out the form elements */
+    font-size: 30px;
 }
 
 .login-form button {
-  cursor: pointer; /* Makes it clear buttons are clickable */
-  /* Add button styling as needed */
+    cursor: pointer; /* Makes it clear buttons are clickable */
+    /* Add button styling as needed */
+}
+
+.buttons {
+    border-radius: 7px;
+    border: 2px solid #000;
+    background: #FFF;
+    color: #000;
+    text-align: center;
+    font-family: 'VT323', monospace;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    height: 40px;
+    width: auto;
+
+    /* darken on hover */
+}
+
+.buttons:hover {
+    background: #E0E0E0;
+}
+
+.lower-container {
+    display: flex;
+    height: auto;
+    justify-content: space-evenly; /* Even spacing of buttons */
+    padding: 20px; /* Padding on the bottom */
 }

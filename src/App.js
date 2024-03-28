@@ -8,16 +8,36 @@ function HomePage_LoggedOut() {
               <div className="rotated-side_quest">SideQuest</div>
           </div>
           <div className="vertical-rectangle-right-brown">
-
-              <img src={`${process.env.PUBLIC_URL}/images/home_page2.png`} alt="Scene" className="scene-image"/>
-              <h1>live real stories</h1>
-              <form className="login-form">
-                  <input type="text" placeholder="Username/Email"/>
-                  <input type="password" placeholder="Password"/>
-                  <button type="submit" onClick={VerifyCredentials}>Login</button>
-              </form>
-              <button type="button">Create Account</button>
-              <button type="button">Learn More</button>
+              <div className="wrapper-container">
+                  <div className="upper-container">
+                      <div className="upper-left-container">
+                          <div className="upper-left-container-top">
+                              <div className="logo-image-container">
+                                  <img src={`${process.env.PUBLIC_URL}/images/home_page2.png`} alt="Scene"
+                                       className="scene-image"/>
+                              </div>
+                          </div>
+                          <div className="upper-left-container-bottom">
+                              <div className="login-form-container">
+                                  <form className="login-form">
+                                      <input type="text" placeholder="Username/Email"/>
+                                      <input type="password" placeholder="Password"/>
+                                  </form>
+                              </div>
+                          </div>
+                      </div>
+                      <div className="upper-right-container">
+                          <div className="slogan-rectangle">
+                              <h1 className="slogan">live real stories</h1>
+                          </div>
+                      </div>
+                  </div>
+                  <div className="lower-container">
+                      <button className="buttons" type="submit" onClick={VerifyCredentials}>Login</button>
+                      <button className="buttons" type="button">Create Account</button>
+                      <button className="buttons" type="button">Learn More</button>
+                  </div>
+              </div>
           </div>
       </div>
   );
