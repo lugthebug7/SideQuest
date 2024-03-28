@@ -1,38 +1,82 @@
 .App {
-  text-align: center;
+  position: relative;
+  background-color: #FEF5D6; /* Change the color as needed */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: 'VT323';
+  src: url('../public/fonts/VT323-Regular.ttf') format('truetype'),
+       url('../public/fonts/VT323-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.vertical-rectangle-left-teal {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 15vw; /* Adjust the width to your preference */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #00826D; /* Change the color as needed */
+}
+
+.rotated-side_quest {
+    transform: rotate(-90deg);
+    transform-origin: center;
+    margin-right: 30px;
+    font-family: 'VT323', monospace; /* Assuming you have loaded the 'VT323' font-family */
+    font-size: 13em; /* Adjust the font size as needed */
+    color: white; /* Adjust the color as needed */
+    white-space: nowrap; /* Ensure the text stays on one line */
+}
+
+.vertical-rectangle-right-brown {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 85vw; /* Adjust the width to your preference */
+  height: 100vh;
+  background-color: #FEF5D6; /* Change the color as needed */
+}
+
+
+.scene-image {
+  max-width: 25%; /* Makes sure the image is not larger than its container */
+  height: auto; /* Keeps the image aspect ratio */
+}
+
+.main-content h1 {
+  font-size: 3em; /* Adjust the size as needed */
+  color: #000; /* Adjust the color as needed */
+  text-transform: uppercase; /* Optional: makes the text uppercase */
+  /* Add more styling as needed */
+}
+
+.login-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  max-width: 300px; /* Adjust as needed */
+  margin: auto; /* Centers the form */
 }
 
-.App-link {
-  color: #61dafb;
+.login-form input,
+.login-form button {
+  margin-bottom: 10px; /* Space out the form elements */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-form button {
+  cursor: pointer; /* Makes it clear buttons are clickable */
+  /* Add button styling as needed */
 }
