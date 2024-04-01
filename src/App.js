@@ -35,7 +35,7 @@ function HomePage_LoggedOut() {
                   <div className="lower-container">
                       <button className="buttons" type="submit" onClick={VerifyCredentials}>Login</button>
                       <button className="buttons" type="button">Create Account</button>
-                      <button className="buttons" type="button">Learn More</button>
+                      <button className="buttons" type="button" >Learn More</button>
                   </div>
               </div>
           </div>
