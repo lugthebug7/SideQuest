@@ -1,6 +1,6 @@
 .HomePageLoggedOut {
     position: relative;
-    background-color: #FEF5D6; /* Change the color as needed */
+    background-color: #FEF5D6;
 }
 
 @font-face {
@@ -19,7 +19,7 @@ body {
     font-family: 'VT323', monospace;
 }
 input, textarea, select, button {
-    font-family: inherit; /* This will force inputs to inherit the font-family from the body */
+    font-family: inherit;
 }
 
 

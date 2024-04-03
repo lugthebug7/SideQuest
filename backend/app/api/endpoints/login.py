@@ -3,7 +3,7 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
-@router.post("/")
+@router.post("/login")
 async def login():
     # Implementation of your login logic...
     return {"message": "Login successful"}

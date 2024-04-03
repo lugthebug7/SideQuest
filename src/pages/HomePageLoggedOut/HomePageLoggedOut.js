@@ -32,7 +32,7 @@ function HomePageLoggedOut() {
                       </div>
                   </div>
                   <div className="lower-container">
-                      <button className="buttons" type="submit" onClick={VerifyCredentials}>Login</button>
+                      <button className="buttons" type="submit" onClick={handleLoginClick}>Login</button>
                       <button className="buttons" type="button">Create Account</button>
                       <button className="buttons" type="button" >Learn More</button>
                   </div>
@@ -42,19 +42,30 @@ function HomePageLoggedOut() {
   );
 }
 
-function VerifyCredentials() {
-    // Get the username and password from the form
-    const username = document.querySelector('input[type="text"]').value;
-    const password = document.querySelector('input[type="password"]').value;
+async function handleLoginClick() {
+  const username = document.querySelector('input[type="text"]').value;
+  const password = document.querySelector('input[type="password"]').value;
 
-    // Check if the username and password are correct
-    if (username === 'admin' && password === 'password') {
-        // Redirect to the home page
-        window.location.href = '/home';
-    } else {
-        // Display an error message
-        alert('Invalid username or password');
-    }
+  const response = await fetch('/login', {  // Replace '/api/login' with your actual backend endpoint
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username: username,
+      password: password,
+    }),
+  });
+
+  const data = await response.json();
+
+  if (response.ok) {
+    // Handle login success (e.g., saving the token, redirecting, etc.)
+    console.log('Login successful', data);
+  } else {
+    // Handle errors (e.g., displaying an error message)
+    console.error('Login failed', data);
+  }
 }
 
 export default HomePageLoggedOut;
