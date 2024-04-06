@@ -46,25 +46,29 @@ async function handleLoginClick() {
   const username = document.querySelector('input[type="text"]').value;
   const password = document.querySelector('input[type="password"]').value;
 
-  const response = await fetch('/login', {  // Replace '/api/login' with your actual backend endpoint
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      username: username,
-      password: password,
-    }),
-  });
+  try {
+    const response = await fetch('/login/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
 
-  const data = await response.json();
+    if (!response.ok) {
+      throw new Error('Login failed');
+    }
 
-  if (response.ok) {
-    // Handle login success (e.g., saving the token, redirecting, etc.)
+    const data = await response.json();
     console.log('Login successful', data);
-  } else {
-    // Handle errors (e.g., displaying an error message)
-    console.error('Login failed', data);
+    // Here, you might want to redirect the user or save the login state
+
+  } catch (error) {
+    console.error(error.message);
+    // Here, handle the error (e.g., show an error message to the user)
   }
 }
 
