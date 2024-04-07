@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../contexts/UserContext';
+import homeImage from '../../images/home_page2.png';
 
 function HomePageLoggedOut() {
   const [error, setError] = useState('');
-  const { login } = useUser(); // Destructure the login function from your context
+  const { login } = useUser();
   const navigate = useNavigate();
 
   const handleLoginClick = async (event) => {
@@ -26,7 +27,7 @@ function HomePageLoggedOut() {
       const data = await response.json();
       console.log('Login successful', data);
 
-      // Use the login function from your context
+
       login({
         username: username,
         accessToken: data.access_token,
@@ -49,7 +50,7 @@ function HomePageLoggedOut() {
                       <div className="upper-left-container">
                           <div className="upper-left-container-top">
                               <div className="logo-image-container">
-                                  <img src={`${process.env.PUBLIC_URL}/images/home_page2.png`} alt="Scene"
+                                  <img src={homeImage} alt="Scene"
                                        className="scene-image"/>
                               </div>
                           </div>

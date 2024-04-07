@@ -109,3 +109,9 @@ async def refresh_token(refresh_request: RefreshRequest, db: Session = Depends(g
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     new_access_token = create_access_token(data={"sub": user_data["sub"]}, expires_delta=access_token_expires)
     return {"access_token": new_access_token, "token_type": "bearer"}
+
+
+@router.post("/logout")
+async def logout(response: Response):
+    response.delete_cookie(key="refresh_token", path="/")
+    return {"message": "Logout successful"}
