@@ -18,13 +18,14 @@ class Users(Base):
     password_hash = Column(String(128))
     image = Column(LargeBinary)
     admin = Column(Boolean, default=False)
+    refresh_token = Column(String(256))
 
     quests_created = relationship('Quests', backref='creator', lazy='dynamic')
     review = relationship('Reviews', backref='author', lazy='dynamic')
 
-    in_progress = relationship('QuestsInProgress', backref='user', lazy='dynamic')
-    completed = relationship('QuestsCompleted', backref='user', lazy='dynamic')
-    created_by = relationship('QuestsCreatedBy', backref='user', lazy='dynamic')
+    in_progress = relationship('QuestsInProgress', back_populates='user', lazy='dynamic')
+    completed = relationship('QuestsCompletedBy', back_populates='user', lazy='dynamic')
+    created_by = relationship('QuestsCreatedBy', back_populates='user', lazy='dynamic')
 
 
     #Implement something for badges?
@@ -69,17 +70,17 @@ class QuestsInProgress(Base):
     quest_id = Column(Integer, ForeignKey('quests.id'))
     user_id = Column(Integer, ForeignKey('users.id'))
 
-    quest = relationship('Quests', back_populates='quests_in_progress')
+    quest = relationship('Quests', back_populates='users_in_progress')
     user = relationship('Users', back_populates='in_progress')
 
 
-class QuestsCompleted(Base):
-    __tablename__ = 'questscompleted'
+class QuestsCompletedBy(Base):
+    __tablename__ = 'questscompletedby'
     id = Column(Integer, primary_key=True, autoincrement=True)
     quest_id = Column(Integer, ForeignKey('quests.id'))
     user_id = Column(Integer, ForeignKey('users.id'))
 
-    quest = relationship('Quests', back_populates='quests_completed')
+    quest = relationship('Quests', back_populates='users_completed_by')
     user = relationship('Users', back_populates='completed')
 
 
@@ -89,7 +90,7 @@ class QuestsCreatedBy(Base):
     quest_id = Column(Integer, ForeignKey('quests.id'))
     user_id = Column(Integer, ForeignKey('users.id'))
 
-    quest = relationship('Quests', back_populates='quests_created_by')
+    quest = relationship('Quests', back_populates='users_created_by')
     user = relationship('Users', back_populates='created_by')
 
 

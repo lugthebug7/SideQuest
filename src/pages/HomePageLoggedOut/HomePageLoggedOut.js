@@ -1,7 +1,43 @@
-import React from "react";
-import HomePageLoggedIn from "../HomePageLoggedIn/HomePageLoggedIn";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from '../../contexts/UserContext';
 
 function HomePageLoggedOut() {
+  const [error, setError] = useState('');
+  const { login } = useUser(); // Destructure the login function from your context
+  const navigate = useNavigate();
+
+  const handleLoginClick = async (event) => {
+    event.preventDefault();
+    const username = document.querySelector('input[type="text"]').value;
+    const password = document.querySelector('input[type="password"]').value;
+
+    try {
+      const response = await fetch('http://localhost:5001/login/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+
+      const data = await response.json();
+      console.log('Login successful', data);
+
+      // Use the login function from your context
+      login({
+        username: username,
+        accessToken: data.access_token,
+      });
+
+      navigate('/home'); // Navigate to home page or dashboard
+    } catch (error) {
+      console.error(error.message);
+      setError(error.message);
+    }
+  };
   return (
       <div className="HomePageLoggedOut">
           <div className="vertical-rectangle-left-teal">
@@ -43,34 +79,8 @@ function HomePageLoggedOut() {
   );
 }
 
-async function handleLoginClick() {
-  const username = document.querySelector('input[type="text"]').value;
-  const password = document.querySelector('input[type="password"]').value;
 
-  try {
-    const response = await fetch('/login/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    });
 
-    if (!response.ok) {
-      throw new Error('Login failed');
-    }
 
-    const data = await response.json();
-    console.log('Login successful', data);
-    // Here, you might want to redirect the user or save the login state
-
-  } catch (error) {
-    console.error(error.message);
-    // Here, handle the error (e.g., show an error message to the user)
-  }
-}
 
 export default HomePageLoggedOut;
