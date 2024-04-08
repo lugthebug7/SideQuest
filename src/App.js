@@ -6,6 +6,7 @@ import HomePageLoggedIn from "./pages/HomePageLoggedIn/HomePageLoggedIn";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserProvider, useUser } from './contexts/UserContext';
 import ProtectedRoutes from './ProtectedRoutes';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function AppWrapper() {
