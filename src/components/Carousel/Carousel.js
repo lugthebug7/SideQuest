@@ -2,48 +2,41 @@ import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
 
-
-
 function DisplayImage({ imageData }) {
-  // Assuming imageData is the Base64 string received from the backend
   const src = `data:image/png;base64,${imageData}`;
-
-  return <img src={src} alt="From Database" />;
+  return <img src={src} alt="From Database" className="d-block w-100" />;
 }
 
 
-const CustomCarousel = ({ genre }) => {
-    const [items, setItems] = useState([]);
+const GenreCarousel = ({ genre }) => {
+    const [quests, setQuests] = useState([]);
 
-/*
-    const fetchItems = async (genre) => {
-        // Fetch items based on the genre
-        // This is just dummy data
-        const fetchedItems = [
-            { id: 1, title: 'Item 1', imageUrl: '/path/to/image1.png' },
-            { id: 2, title: 'Item 2', imageUrl: '/path/to/image2.png' },
-            // Add more items as needed
-        ];
-        setItems(fetchedItems);
-    };
-*/
     useEffect(() => {
-        fetchItems(genre);
+        const fetchQuests = async () => {
+            const response = await fetch('http://localhost:5001/populate/', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({genre}),
+            });
+            const data = await response.json();
+            if (data.quests_for_genre) {
+                setQuests(data.quests_for_genre);
+            }
+        };
+        fetchQuests();
     }, [genre]);
+
 
     return (
         <div className="container">
-            <h2>{genre}</h2>
+            <h2>{genre} Quests</h2>
             <Carousel>
-                {items.map((item, index) => (
+                {quests.map((item, index) => (
                     <Carousel.Item key={index}>
-                        <img
-                            className="d-block w-100"
-                            src={DisplayImage(item.imageCode)}
-                            alt={item.title}
-                        />
+                        <DisplayImage imageData={item.image} />
                         <Carousel.Caption>
                             <h3>{item.title}</h3>
+                            <p>{item.description}</p>
                         </Carousel.Caption>
                     </Carousel.Item>
                 ))}
@@ -52,4 +45,4 @@ const CustomCarousel = ({ genre }) => {
     );
 };
 
-export default CustomCarousel;
+export default GenreCarousel;
