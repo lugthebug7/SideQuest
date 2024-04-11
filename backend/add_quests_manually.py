@@ -22,7 +22,7 @@ def convert_image_to_binary(image_path):
 
 def add_quest(title, quest_description, image_path):
     image = convert_image_to_binary(image_path)
-    new_quest = Quests(title=title, description=quest_description, image=image)
+    new_quest = Quests(title=title, description=quest_description, image=image, user_id=2)
     db.add(new_quest)
     db.commit()
     quest_genre = QuestGenres(quest_id=new_quest.id, genre_id=7)
