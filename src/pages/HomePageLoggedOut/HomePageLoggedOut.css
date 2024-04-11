@@ -80,7 +80,9 @@ input, textarea, select, button {
 }
 
 .upper-left-container-top {
-    flex-grow: 2; /* Takes 2/3 of the space */
+    flex-grow: 2;
+    margin-top: -30px;
+    margin-right: 75px;
 
 }
 
@@ -97,9 +99,7 @@ input, textarea, select, button {
 
 .logo-image-container img {
     border: 7px solid #000;
-    width: 90%; /* Full width of the container */
-
-
+    width: 100%; /* Full width of the container */
 }
 
 
@@ -109,7 +109,7 @@ input, textarea, select, button {
     display: flex;
     justify-content: flex-start;
     margin-left: 50px;
-    margin-top: 20px
+    margin-top: 15px
 
 }
 
@@ -118,7 +118,7 @@ input, textarea, select, button {
 
 .upper-right-container {
     width: 100vw;
-    flex-grow: 1; /* Occupies half of the upper container */
+    flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -132,38 +132,47 @@ input, textarea, select, button {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
 }
 
 .slogan-rectangle {
-    width: 30vw;
+    margin-top: 200px;
+    width: auto;
     height: 70vh;
 }
 
 
 
 .main-content h1 {
-    font-size: 3em; /* Adjust the size as needed */
-    color: #000; /* Adjust the color as needed */
-    text-transform: uppercase; /* Optional: makes the text uppercase */
-    /* Add more styling as needed */
+    font-size: 3em;
+    color: #000;
+    text-transform: uppercase;
 }
 
-.login-form {
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    font-family: 'VT323', monospace;
+    border-radius: 4px;
     display: flex;
     flex-direction: column;
-    max-width: 300px; /* Adjust as needed */
-    margin: auto; /* Centers the form */
+    max-width: 250px;
+    height: 40px;
+    font-size: 30px;
+}
+
+.login-form input[type="text"] {
+    margin-bottom: 15px;
+    margin-top: -75px;
 }
 
 .login-form input,
 .login-form button {
-    margin-bottom: 15px; /* Space out the form elements */
+    margin-bottom: 15px;
     font-size: 30px;
 }
 
 .login-form button {
-    cursor: pointer; /* Makes it clear buttons are clickable */
-    /* Add button styling as needed */
+    cursor: pointer;
 }
 
 .buttons {
@@ -179,8 +188,8 @@ input, textarea, select, button {
     line-height: normal;
     height: 40px;
     width: auto;
-
-    /* darken on hover */
+    margin-top: -70px;
+    margin-right: 50px;
 }
 
 .buttons:hover {
@@ -190,6 +199,8 @@ input, textarea, select, button {
 .lower-container {
     display: flex;
     height: auto;
-    justify-content: space-evenly; /* Even spacing of buttons */
-    padding: 20px; /* Padding on the bottom */
+    justify-content: space-evenly;
+    padding: 20px;
+    margin-bottom: 50px;
+    margin-top: -45px;
 }

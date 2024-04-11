@@ -1,49 +1,60 @@
-/* Navbar.css */
+@font-face {
+    font-family: 'VT323';
+    src: url('/public/fonts/VT323-Regular.ttf') format('truetype'),
+    url('/public/fonts/VT323-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .navbar {
-  background: #00826D;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background: #00826D;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar-container {
-  display: flex;
-  width: 100%;
-  padding: 0 20px;
-  justify-content: flex-start;
-  align-items: center;
+    display: flex;
+    width: 100%;
+    padding: 0 20px;
+    justify-content: flex-start;
+    align-items: center;
 
 }
 
 .navbar-logo {
-  color: white;
-  justify-self: start;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 55px;
-  display: flex;
-  align-items: center;
+    color: white;
+    justify-self: start;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 55px;
+    display: flex;
+    align-items: center;
+    font-family: 'VT323', monospace;
+    margin-top: -30px;
 }
 
 .nav-menu {
-  display: flex;
-  list-style: none;
+    display: flex;
+    list-style: none;
+    align-items: center;
 }
 
 .nav-item {
-  margin-right: 20px;
-  font-size: 35px;
-  margin-top: 14px;
+    margin-right: 20px;
+    font-size: 35px;
+    margin-top: 7px;
+    font-family: 'VT323', monospace;
 }
 
 .nav-links {
-  color: white;
-  text-decoration: none;
-  padding: 2.5rem 3rem;
+    color: white;
+    text-decoration: none;
+    padding: 2.5rem 3rem;
 }
 
 .nav-links:hover {
-  color: #555;
-  border-radius: 4px;
+    color: #555;
+    border-radius: 4px;
 }

@@ -14,7 +14,7 @@ password = "crapBug379?!."
 hashed_password = pwd_context.hash(password)
 
 # Database connection
-DATABASE_URL = "mysql+pymysql://lugthebug:crapBug379?!.@localhost/sidequestdb2"  # Adjust this to your actual database URL
+DATABASE_URL = "mysql+pymysql://lugthebug:crapBug379?!.@localhost/sidequestdb2"
 engine = create_engine(DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
