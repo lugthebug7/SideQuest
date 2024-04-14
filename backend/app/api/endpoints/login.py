@@ -6,8 +6,8 @@ from passlib.context import CryptContext
 from pydantic import BaseModel
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
-import os  # Import the os module
-from dotenv import load_dotenv  # Import the load_dotenv function
+import os
+from dotenv import load_dotenv
 
 from ...models import Users
 
@@ -77,12 +77,12 @@ async def login(login_request: LoginRequest, response: Response, db: Session = D
 
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
+        data={"sub": user.username, "admin": user.admin}, expires_delta=access_token_expires
     )
 
     refresh_token_expires = timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)
     refresh_token = create_refresh_token(
-        data={"sub": user.username}, expires_delta=refresh_token_expires
+        data={"sub": user.username, "admin": user.admin}, expires_delta=refresh_token_expires
     )
 
     user.refresh_token = refresh_token
@@ -92,11 +92,11 @@ async def login(login_request: LoginRequest, response: Response, db: Session = D
         key="refresh_token",
         value=refresh_token,
         httponly=True,
-        max_age=REFRESH_TOKEN_EXPIRE_DAYS * 24 * 60 * 60,  # Convert days to seconds
+        max_age=REFRESH_TOKEN_EXPIRE_DAYS * 24 * 60 * 60,
         path="/",
     )
 
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"admin": user.admin, "access_token": access_token, "token_type": "bearer"}
 
 
 @router.post("/refresh")

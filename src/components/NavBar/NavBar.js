@@ -1,8 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
+import { useUser } from '../../contexts/UserContext';
 
 const Navbar = () => {
+
+  const { user } = useUser();
+  console.log("Logged in user details:", user);
+
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -11,7 +17,10 @@ const Navbar = () => {
         </Link>
         <ul className="nav-menu">
           <li className="nav-item">
-            <Link to="/" className="nav-links">Create</Link>
+            {user?.admin ? (
+            <Link to="/createquestadmin" className="nav-links">admin</Link> ) :
+            (<Link to="/" className="nav-links">not admin</Link>)
+            }
           </li>
           <li className="nav-item">
             <Link to="/about" className="nav-links">Community</Link>

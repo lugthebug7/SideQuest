@@ -3,6 +3,7 @@ from sqlalchemy import Column, Integer, String, LargeBinary, Boolean, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
+import json
 
 Base = declarative_base()
 metadata = Base.metadata
@@ -27,9 +28,6 @@ class Users(Base):
     completed = relationship('QuestsCompletedBy', back_populates='user', lazy='dynamic')
     created_by = relationship('QuestsCreatedBy', back_populates='user', lazy='dynamic')
 
-
-    #Implement something for badges?
-
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
@@ -41,7 +39,8 @@ class Quests(Base):
     __tablename__ = 'quests'
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(64), index=True, nullable=False, unique=True)
-    description = Column(String(300), index=True, nullable=False)
+    description = Column(String(1000), index=True, nullable=False)
+    objectives = Column(String(1000), index=True)
     image = Column(LargeBinary)
 
     user_id = Column(Integer, ForeignKey('users.id'))
@@ -52,6 +51,12 @@ class Quests(Base):
     users_in_progress = relationship('QuestsInProgress', back_populates='quest')
     users_completed_by = relationship('QuestsCompletedBy', back_populates='quest')
     users_created_by = relationship('QuestsCreatedBy', back_populates='quest')
+
+    def set_objectives(self, objectives):
+        self.objectives = json.dumps(objectives)
+
+    def get_objectives(self):
+        return json.loads(self.objectives) if self.objectives else []
 
 
 class Reviews(Base):

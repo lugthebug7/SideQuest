@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { UserProvider, useUser } from './contexts/UserContext';
 import ProtectedRoutes from './ProtectedRoutes';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CreateQuestAdmin from "./pages/CreateQuestAdmin/CreateQuestAdmin";
 
 
 function AppWrapper() {
@@ -27,6 +28,11 @@ function App() {
                 <Route path="/home" element={
                     <ProtectedRoutes>
                         <HomePageLoggedIn />
+                    </ProtectedRoutes>
+                } />
+                <Route path="/createquestadmin" element={
+                    <ProtectedRoutes>
+                        <CreateQuestAdmin />
                     </ProtectedRoutes>
                 } />
 

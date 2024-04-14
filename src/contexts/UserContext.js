@@ -7,9 +7,10 @@ export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Holds user data
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Tracks whether the user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = (userData) => {
+    console.log("Logging in user:", userData);
     setUser(userData);
     setIsLoggedIn(true);
   };

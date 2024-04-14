@@ -175,6 +175,10 @@ input, textarea, select, button {
     cursor: pointer;
 }
 
+.login-error {
+    font-family: 'VT323', monospace;
+}
+
 .buttons {
     border-radius: 7px;
     border: 2px solid #000;

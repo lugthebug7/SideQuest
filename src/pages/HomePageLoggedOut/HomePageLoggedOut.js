@@ -7,6 +7,7 @@ function HomePageLoggedOut() {
   const [error, setError] = useState('');
   const { login } = useUser();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleLoginClick = async (event) => {
     event.preventDefault();
@@ -21,6 +22,7 @@ function HomePageLoggedOut() {
       });
 
       if (!response.ok) {
+        setErrorMessage('Invalid credentials');
         throw new Error('Login failed');
       }
 
@@ -30,6 +32,7 @@ function HomePageLoggedOut() {
 
       login({
         username: username,
+        admin: data.admin,
         accessToken: data.access_token,
       });
 
@@ -59,6 +62,7 @@ function HomePageLoggedOut() {
                                   <form className="login-form">
                                       <input type="text" placeholder="Username/Email"/>
                                       <input type="password" placeholder="Password"/>
+                                      <p className="login-error">{errorMessage}</p>
                                   </form>
                               </div>
                           </div>
