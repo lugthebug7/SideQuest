@@ -1,7 +1,83 @@
 .CreateQuestAdmin {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     position: relative;
     background-image: url('../../images/jean-background.png');
     background-size: cover;
     background-position: center;
     height: 100vh;
+}
+
+.title-description-objectives-container {
+  grid-column: 1 / 3;
+  /* Style for the left two-thirds */
+}
+
+.checkBox {
+    grid-column: 3;
+    font-family: 'VT323', monospace;
+    color: white;
+    font-size: 21px;
+}
+
+.objectives {
+    font-family: 'VT323', monospace;
+    color: black;
+    font-size: 21px;
+
+}
+
+.checkBox input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkBox input[type="checkbox"] + label::before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid white;
+    background-color: transparent;
+    margin-right: 8px;
+    border-radius: 20px;
+}
+
+.checkBox input[type="checkbox"]:checked + label::before {
+    background-color: white;
+}
+
+h2 {
+    font-family: 'VT323', monospace;
+    color: white;
+    font-size: 40px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.submit-button {
+    border-radius: 7px;
+    border: 4px solid black;
+    background: #FFF;
+    color: #000;
+    text-align: center;
+    font-family: 'VT323', monospace;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    height: 37px;
+    width: auto;
+    margin-top: -70px;
+    margin-right: 50px;
+}
+
+.submit-button:hover {
+    background: #E0E0E0;
+}
+
+.title {
+    margin-top: 0px;
 }

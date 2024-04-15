@@ -9,7 +9,11 @@ import './CreateQuestAdmin.css';
 function CreateQuestAdmin() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [objectives, setObjectives] = useState('');
+  const [objective1, setObjective1] = useState('');
+  const [objective2, setObjective2] = useState('');
+  const [objective3, setObjective3] = useState('');
+  const [objective4, setObjective4] = useState('');
+  const [objective5, setObjective5] = useState('');
   const [image, setImage] = useState(null);
   const [error, setError] = useState('');
   const navigate = useNavigate();
@@ -36,17 +40,23 @@ function CreateQuestAdmin() {
     try {
       const title = document.querySelector('input[type="text"]').value;
       const description = document.querySelector('input[type="text"]').value;
+
+      // these two are not correct
+      //objectives actually needs to be a list of strings
       const objectives = document.querySelector('input[type="text"]').value;
+      // genres needs to be a list of ints
+      const genres = document.querySelector('input[type="text"]').value;
+
       const binaryData = await convertImageToBinary(image);
 
 
-      // Example API call (you'll need to implement the server-side):
+
        const response = await fetch('http://localhost:5001/createAdminQuest/', {
          method: 'POST',
          headers: {
            'Content-Type': 'application/json'
          },
-         body: JSON.stringify({ title, description, objectives, image: binaryData })
+         body: JSON.stringify({ title, description, objectives, genres, image: binaryData })
        });
 
        if (!response.ok) {
@@ -66,12 +76,86 @@ function CreateQuestAdmin() {
         <div className="CreateQuestAdmin">
           <div>
             <form onSubmit={handleSubmitClick}>
-              <input type="text" placeholder="Title" value={title} onChange={e => setTitle(e.target.value)}/>
-              <input type="text" placeholder="Description" value={description}
-                     onChange={e => setDescription(e.target.value)}/>
-              <input type="text" placeholder="Objectives" value={objectives} onChange={e => setObjectives(e.target.value)}/>
-              <input type="file" onChange={handleImageChange} accept="image/*"/>
-              <button type="submit">Create Quest</button>
+              <div className="title-description-objectives-container">
+                <div>
+                  <h2 className="title">Title</h2>
+                  <input className="title" type="text" placeholder="Title" value={title}
+                         onChange={e => setTitle(e.target.value)}/>
+                </div>
+                <div>
+                  <h2>Description</h2>
+                  <input className="description" type="text" placeholder="Description" value={description}
+                         onChange={e => setDescription(e.target.value)}/>
+                </div>
+                <div className="objectives-container">
+                  <h2>Objectives</h2>
+                  <div>
+                    <input className="objectives" type="text" placeholder="Objective 1" value={objective1}
+                           onChange={e => setObjective1(e.target.value)}/>
+                  </div>
+                  <div>
+                    <input className="objectives" type="text" placeholder="Objective 2 (Optional)" value={objective2}
+                           onChange={e => setObjective2(e.target.value)}/>
+                  </div>
+                  <div>
+                    <input className="objectives" type="text" placeholder="Objective 3 (Optional)" value={objective3}
+                           onChange={e => setObjective3(e.target.value)}/>
+                  </div>
+                  <div>
+                    <input className="objectives" type="text" placeholder="Objective 4 (Optional)" value={objective4}
+                           onChange={e => setObjective4(e.target.value)}/>
+                  </div>
+                  <div>
+                    <input className="objectives" type="text" placeholder="Objective 5 (Optional)" value={objective5}
+                           onChange={e => setObjective5(e.target.value)}/>
+                  </div>
+                </div>
+              </div>
+
+              <div className="checkBox">
+                <div>
+                  <input type="checkbox" id="1"/>
+                  <label htmlFor="1">Stay At Home</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="2"/>
+                  <label htmlFor="2">Free Festivities</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="3"/>
+                  <label htmlFor="3">Nothing's Free</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="4"/>
+                  <label htmlFor="4">Hungry Hungry Hobbits</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="5"/>
+                  <label htmlFor="5">Adult Adventures</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="6"/>
+                  <label htmlFor="6">For the Lovers</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="7"/>
+                  <label htmlFor="7">For the Loners</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="8"/>
+                  <label htmlFor="8">For the Party Pants</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="9"/>
+                  <label htmlFor="9">Get to Know Your Town</label>
+                </div>
+                <div>
+                  <input type="checkbox" id="10"/>
+                  <label htmlFor="10">Touch Grass</label>
+                </div>
+              </div>
+              <input className="image" type="file" onChange={handleImageChange} accept="image/*"/>
+              <button className="submit-button" type="submit">Create Quest</button>
             </form>
             {error && <p style={{color: 'red'}}>{error}</p>}
           </div>
