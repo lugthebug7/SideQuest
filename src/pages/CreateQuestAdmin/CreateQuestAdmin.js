@@ -41,23 +41,25 @@ function CreateQuestAdmin() {
       const title = document.querySelector('input[type="text"]').value;
       const description = document.querySelector('input[type="text"]').value;
 
-      // these two are not correct
-      //objectives actually needs to be a list of strings
-      const objectives = document.querySelector('input[type="text"]').value;
-      // genres needs to be a list of ints
-      const genres = document.querySelector('input[type="text"]').value;
+      const objectives = [objective1, objective2, objective3, objective4, objective5].filter(obj => obj.trim() !== '');
 
-      const binaryData = await convertImageToBinary(image);
-
+      const genres = [];
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+          genres.push(parseInt(checkbox.id));
+      });
 
 
-       const response = await fetch('http://localhost:5001/createAdminQuest/', {
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json'
-         },
-         body: JSON.stringify({ title, description, objectives, genres, image: binaryData })
-       });
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('objectives', JSON.stringify(objectives));
+        formData.append('genre_ids', JSON.stringify(genres));
+        formData.append('image', image);
+
+        const response = await fetch('http://localhost:5001/admincreate/create', {
+          method: 'POST',
+          body: formData
+        });
 
        if (!response.ok) {
         setErrorMessage('Invalid Quest Input');

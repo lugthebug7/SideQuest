@@ -32,7 +32,7 @@ def get_quests(db: Session, genre_id: int):
     return quests_for_genres
 
 
-@router.post("/")
+@router.post("/populate")
 async def login(genre_request: GenreRequest, db: Session = Depends(get_db)):
     quests = get_quests(db, genre_request.genre_id)
     quests_data = []
