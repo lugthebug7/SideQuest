@@ -39,8 +39,12 @@ class Quests(Base):
     __tablename__ = 'quests'
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(64), index=True, nullable=False, unique=True)
-    description = Column(String(1000), index=True, nullable=False)
-    objectives = Column(String(1000), index=True)
+    description = Column(String(512), index=True, nullable=False)
+    objective1 = Column(String(256), index=True, nullable=False)
+    objective2 = Column(String(256), index=True, nullable=False)
+    objective3 = Column(String(256), index=True, nullable=False)
+    objective4 = Column(String(256), index=True, nullable=False)
+    objective5 = Column(String(256), index=True, nullable=False)
     image = Column(LargeBinary)
 
     user_id = Column(Integer, ForeignKey('users.id'))
@@ -53,7 +57,9 @@ class Quests(Base):
     users_created_by = relationship('QuestsCreatedBy', back_populates='quest')
 
     def set_objectives(self, objectives):
-        self.objectives = json.dumps(objectives)
+        for i in range(len(objectives)):
+            if objectives[i] < 256:
+                self.objectives[i] = objectives[i]
 
     def get_objectives(self):
         return json.loads(self.objectives) if self.objectives else []

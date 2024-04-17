@@ -21,17 +21,6 @@ function CreateQuestAdmin() {
 
   const handleImageChange = (event) => {
     setImage(event.target.files[0]);
-    console.log(event.target.files[0])
-  };
-
-  const convertImageToBinary = (file) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-      console.log("Did I make it this far?")
-      reader.readAsBinaryString(file);
-    });
   };
 
   const handleSubmitClick = async (event) => {
@@ -45,7 +34,7 @@ function CreateQuestAdmin() {
 
       const genres = [];
         document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
-          genres.push(parseInt(checkbox.id));
+          genres.push(checkbox.id);
       });
 
 
@@ -53,13 +42,23 @@ function CreateQuestAdmin() {
         formData.append('title', title);
         formData.append('description', description);
         formData.append('objectives', JSON.stringify(objectives));
-        formData.append('genre_ids', JSON.stringify(genres));
+        formData.append('genres', JSON.stringify(genres));
+        console.log("Genres array before sending:", genres);
+        console.log("Genres array before sending:", JSON.stringify(genres));
         formData.append('image', image);
+
+        console.log(formData.get('title'));
+        console.log(formData.get('description'));
+        console.log(formData.get('objectives'));
+        console.log(formData.get('genres'));
+        console.log(formData.get('image'));
+
 
         const response = await fetch('http://localhost:5001/admincreate/create', {
           method: 'POST',
           body: formData
         });
+
 
        if (!response.ok) {
         setErrorMessage('Invalid Quest Input');
@@ -92,7 +91,7 @@ function CreateQuestAdmin() {
                 <div className="objectives-container">
                   <h2>Objectives</h2>
                   <div>
-                    <input className="objectives" type="text" placeholder="Objective 1" value={objective1}
+                    <input className="objectives"  type="text" placeholder="Objective 1" value={objective1}
                            onChange={e => setObjective1(e.target.value)}/>
                   </div>
                   <div>
