@@ -3,5 +3,6 @@
     background-image: url('../../images/jean-background.png');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     height: 100vh;
 }

@@ -1,8 +1,31 @@
+.quest-group-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.quest-container {
+    flex: 0 0 auto;
+    padding: 5px;
+    margin: 10px;
+    height: 200px;
+    width: 200px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    border: 3px solid white;
+}
+
 .quest-container img {
-    width: 20%;
-    height: 20%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.5s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.quest-genre-name {
+    margin-left: -7%;
 }

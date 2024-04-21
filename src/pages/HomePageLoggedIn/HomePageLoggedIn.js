@@ -21,13 +21,19 @@ function HomePageLoggedIn() {
 
 
     return (
-        <>
-            <NavBar />
-            <div className="HomePageLoggedIn">
-                <button onClick={handleLogoutClick}>{user.username}</button>
-                <Carousel genre={1}/>
-            </div>
-        </>
+        <div className="HomePageLoggedIn">
+            <button onClick={handleLogoutClick}>{user.username}</button>
+            <Carousel genre={1}/>
+            <Carousel genre={2}/>
+            <Carousel genre={3}/>
+            <Carousel genre={4}/>
+            <Carousel genre={5}/>
+            <Carousel genre={6}/>
+            <Carousel genre={7}/>
+            <Carousel genre={8}/>
+            <Carousel genre={9}/>
+            <Carousel genre={10}/>
+        </div>
     );
 }
 

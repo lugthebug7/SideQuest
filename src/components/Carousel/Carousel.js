@@ -3,10 +3,27 @@ import Carousel from 'react-bootstrap/Carousel';
 import './Carousel.css';
 
 
-function DisplayImage({ imageData }) {
-  const src = `data:image/png;base64,${imageData}`;
-  return <img src={src} alt="From Database" className="d-block w-100" />;
-}
+const groupQuests = (quests, groupSize) => {
+    const fullGroups = [];
+    let currentGroup = [];
+
+    quests.forEach((quest, index) => {
+        currentGroup.push(quest);
+        if ((index + 1) % groupSize === 0) {
+            fullGroups.push(currentGroup);
+            currentGroup = [];
+        }
+    });
+
+    if (currentGroup.length > 0) {
+        while (currentGroup.length < groupSize) {
+            currentGroup.push(...quests.slice(0, groupSize - currentGroup.length));
+        }
+        fullGroups.push(currentGroup);
+    }
+
+    return fullGroups;
+};
 
 
 const GenreCarousel = ({ genre }) => {
@@ -26,7 +43,7 @@ const GenreCarousel = ({ genre }) => {
             });
             if (response.ok) {
                 const data = await response.json();
-                setQuests(data.quests_for_genre);
+                setQuests(groupQuests(data.quests_for_genre, 5));
                 if (data.quests_for_genre.length > 0) {
                     setGenreName(data.quests_for_genre[0].genre);
                 }
@@ -40,14 +57,16 @@ const GenreCarousel = ({ genre }) => {
 
     return (
         <div className="container">
-            <h2>{genreName} Quests</h2>
-            <Carousel>
-                {quests.map((item, index) => (
+            <h2 className="quest-genre-name">{genreName} Quests</h2>
+            <Carousel interval={null} wrap={true}>
+                {quests.map((group, index) => (
                     <Carousel.Item key={index}>
-                        <div className="quest-container">
-                            <img src={directory + item.image} alt="Quest"></img>
-                            {/* <h3>{item.title}</h3>
-                            <p>{item.description}</p> 8*/}
+                        <div className="quest-group-container">
+                            {group.map((item, subIndex) => (
+                                <div key={subIndex} className="quest-container">
+                                        <img src={directory + item.image} alt="Quest" />
+                                </div>
+                            ))}
                         </div>
                     </Carousel.Item>
                 ))}
