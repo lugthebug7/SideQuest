@@ -43,15 +43,7 @@ function CreateQuestAdmin() {
         formData.append('description', description);
         formData.append('objectives', JSON.stringify(objectives));
         formData.append('genres', JSON.stringify(genres));
-        console.log("Genres array before sending:", genres);
-        console.log("Genres array before sending:", JSON.stringify(genres));
         formData.append('image', image);
-
-        console.log(formData.get('title'));
-        console.log(formData.get('description'));
-        console.log(formData.get('objectives'));
-        console.log(formData.get('genres'));
-        console.log(formData.get('image'));
 
 
         const response = await fetch('http://localhost:5001/admincreate/create', {

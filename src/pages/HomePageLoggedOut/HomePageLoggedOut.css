@@ -28,22 +28,22 @@ input, textarea, select, button {
     left: 0;
     top: 0;
     bottom: 0;
-    width: 15vw; /* Adjust the width to your preference */
+    width: 15vw;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #00826D; /* Change the color as needed */
+    background-color: #00826D;
 }
 
 .rotated-side_quest {
     transform: rotate(-90deg);
     transform-origin: center;
     margin-right: 30px;
-    font-family: 'VT323', monospace; /* Assuming you have loaded the 'VT323' font-family */
-    font-size: 13em; /* Adjust the font size as needed */
-    color: white; /* Adjust the color as needed */
-    white-space: nowrap; /* Ensure the text stays on one line */
+    font-family: 'VT323', monospace;
+    font-size: 13em;
+    color: white;
+    white-space: nowrap;
 }
 
 .vertical-rectangle-right-brown {
@@ -51,13 +51,13 @@ input, textarea, select, button {
     right: 0;
     top: 0;
     bottom: 0;
-    width: 85vw; /* Adjust the width to your preference */
+    width: 85vw;
     height: 100vh;
-    background-color: #FEF5D6; /* Change the color as needed */
+    background-color: #FEF5D6;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centers children vertically in the container */
-    align-items: center; /* Aligns children to the start of the cross axis */
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -87,19 +87,19 @@ input, textarea, select, button {
 }
 
 .logo-image-container {
-    width: 100%; /* Full width of the container */
+    width: 100%;
     height: 100%;
-    overflow: hidden; /* Ensures that the image is cropped to the container */
+    overflow: hidden;
 
-    display: flex; /* Use flexbox for centering */
-    justify-content: flex-start; /* Center horizontally */
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
 
 }
 
 .logo-image-container img {
     border: 7px solid #000;
-    width: 100%; /* Full width of the container */
+    width: 100%;
 }
 
 

@@ -17,9 +17,9 @@ class Users(Base):
     email = Column(String(120), index=True, unique=True)
     bio = Column(String(256), index=True)
     password_hash = Column(String(128))
-    image = Column(LargeBinary)
+    image = Column(String(256))
     admin = Column(Boolean, default=False)
-    refresh_token = Column(String(256))
+    refresh_token = Column(String(256), index=True)
 
     quests_created = relationship('Quests', backref='creator', lazy='dynamic')
     review = relationship('Reviews', backref='author', lazy='dynamic')
@@ -39,13 +39,13 @@ class Quests(Base):
     __tablename__ = 'quests'
     id = Column(Integer, primary_key=True, autoincrement=True)
     title = Column(String(64), index=True, nullable=False, unique=True)
-    description = Column(String(512), index=True, nullable=False)
-    objective1 = Column(String(256), index=True, nullable=False)
-    objective2 = Column(String(256), index=True, nullable=False)
-    objective3 = Column(String(256), index=True, nullable=False)
-    objective4 = Column(String(256), index=True, nullable=False)
-    objective5 = Column(String(256), index=True, nullable=False)
-    image = Column(LargeBinary)
+    description = Column(String(512), index=True)
+    objective1 = Column(String(256), index=True)
+    objective2 = Column(String(256), index=True)
+    objective3 = Column(String(256), index=True)
+    objective4 = Column(String(256), index=True)
+    objective5 = Column(String(256), index=True)
+    image = Column(String(256), index=True)
 
     user_id = Column(Integer, ForeignKey('users.id'))
 
@@ -57,9 +57,9 @@ class Quests(Base):
     users_created_by = relationship('QuestsCreatedBy', back_populates='quest')
 
     def set_objectives(self, objectives):
-        for i in range(len(objectives)):
-            if objectives[i] < 256:
-                self.objectives[i] = objectives[i]
+        for i, objective in enumerate(objectives):
+            if len(objective) < 256:
+                setattr(self, 'objective' + str(i + 1), objective)
 
     def get_objectives(self):
         return json.loads(self.objectives) if self.objectives else []
