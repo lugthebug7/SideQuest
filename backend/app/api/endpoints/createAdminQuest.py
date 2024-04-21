@@ -19,7 +19,7 @@ from ...models import Users, Quests, Genres, QuestGenres
 load_dotenv()
 
 router = APIRouter()
-UPLOAD_DIRECTORY = "/Users/lukepotter/Desktop/sidequest_v3/backend/uploads"
+UPLOAD_DIRECTORY = "/Users/lukepotter/Desktop/sidequest_v3/uploads"
 
 
 def get_db():
@@ -51,12 +51,11 @@ async def create_admin_quest(title: str = Form(...), description: str = Form(...
     filename = f"{title}_{image.filename}"
     safe_filename = "".join(c for c in filename if c.isalnum() or c in " ._").rstrip()
     file_path = os.path.join(UPLOAD_DIRECTORY, safe_filename)
-
     image_obj.save(file_path, format='JPEG', quality=85)
     try:
         decoded_objectives = json.loads(objectives)
         decoded_genres = json.loads(genres)
-        new_quest = Quests(title=title, description=description, image=file_path, user_id=2)
+        new_quest = Quests(title=title, description=description, image=safe_filename, user_id=2)
         db.add(new_quest)
         db.commit()
         for genre_id in decoded_genres:

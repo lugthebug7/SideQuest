@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from app.api import api_router
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
@@ -22,6 +23,7 @@ origins = [
     "http://localhost:8000",
 ]
 
+app.mount("/uploads", StaticFiles(directory="/Users/lukepotter/Desktop/sidequest_v3/uploads"), name="uploads")
 
 app.add_middleware(
     CORSMiddleware,

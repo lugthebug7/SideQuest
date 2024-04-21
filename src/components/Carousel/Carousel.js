@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import './Carousel.css';
 
 
 function DisplayImage({ imageData }) {
@@ -10,17 +11,27 @@ function DisplayImage({ imageData }) {
 
 const GenreCarousel = ({ genre }) => {
     const [quests, setQuests] = useState([]);
+    const [genreName, setGenreName] = useState("");
+    const directory = "http://localhost:5001/uploads/";
+
 
     useEffect(() => {
         const fetchQuests = async () => {
-            const response = await fetch('http://localhost:5001/populate/', {
+            console.log(JSON.stringify({genre}));
+
+            const response = await fetch('http://localhost:5001/populate/populate', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({genre}),
+                body: JSON.stringify({genre_id: genre})
             });
-            const data = await response.json();
-            if (data.quests_for_genre) {
+            if (response.ok) {
+                const data = await response.json();
                 setQuests(data.quests_for_genre);
+                if (data.quests_for_genre.length > 0) {
+                    setGenreName(data.quests_for_genre[0].genre);
+                }
+            } else {
+                console.error("Failed to fetch quests:", response.statusText);
             }
         };
         fetchQuests();
@@ -29,15 +40,15 @@ const GenreCarousel = ({ genre }) => {
 
     return (
         <div className="container">
-            <h2>{genre} Quests</h2>
+            <h2>{genreName} Quests</h2>
             <Carousel>
                 {quests.map((item, index) => (
                     <Carousel.Item key={index}>
-                        <DisplayImage imageData={item.image} />
-                        <Carousel.Caption>
-                            <h3>{item.title}</h3>
-                            <p>{item.description}</p>
-                        </Carousel.Caption>
+                        <div className="quest-container">
+                            <img src={directory + item.image} alt="Quest"></img>
+                            {/* <h3>{item.title}</h3>
+                            <p>{item.description}</p> 8*/}
+                        </div>
                     </Carousel.Item>
                 ))}
             </Carousel>

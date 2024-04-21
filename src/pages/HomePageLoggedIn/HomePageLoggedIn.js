@@ -3,6 +3,7 @@ import HomePageLoggedOut from "../HomePageLoggedOut/HomePageLoggedOut";
 import { useUser } from '../../contexts/UserContext';
 import { useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
+import Carousel from "../../components/Carousel/Carousel";
 import './HomePageLoggedIn.css';
 
 
@@ -24,6 +25,7 @@ function HomePageLoggedIn() {
             <NavBar />
             <div className="HomePageLoggedIn">
                 <button onClick={handleLogoutClick}>{user.username}</button>
+                <Carousel genre={1}/>
             </div>
         </>
     );

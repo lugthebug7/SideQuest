@@ -1,5 +1,5 @@
 import base64
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from ...database import SessionLocal
 from pydantic import BaseModel
@@ -33,23 +33,23 @@ def get_quests(db: Session, genre_id: int):
 
 
 @router.post("/populate")
-async def login(genre_request: GenreRequest, db: Session = Depends(get_db)):
-    quests = get_quests(db, genre_request.genre_id)
-    quests_data = []
-    for quest, genre in quests:
-        quest_data = {
-            "id": quest.id,
-            "title": quest.title,
-            "description": quest.description,
-            "image": binary_to_base64(quest.image) if quest.image else None,
-            "genre": genre
-        }
-        quests_data.append(quest_data)
-    return {"quests_for_genre": quests_data}
+async def populate_carousel(genre_request: GenreRequest, db: Session = Depends(get_db)):
+    try:
+        quests = get_quests(db, genre_request.genre_id)
+        quests_data = []
+        for quest, genre_name in quests:
+            quest_data = {
+                "id": quest.id,
+                "title": quest.title,
+                "description": quest.description,
+                "image": quest.image if quest.image else None,
+                "genre": genre_name
+            }
+            quests_data.append(quest_data)
+        return {"quests_for_genre": quests_data}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
-
-def binary_to_base64(binary):
-    return base64.b64encode(binary).decode('utf-8')
 
 
 
