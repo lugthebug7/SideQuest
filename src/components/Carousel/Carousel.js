@@ -57,7 +57,7 @@ const GenreCarousel = ({ genre }) => {
 
     return (
         <div className="container">
-            <h2 className="quest-genre-name">{genreName} Quests</h2>
+            <h2 className="quest-genre-name">{genreName}</h2>
             <Carousel interval={null} wrap={true}>
                 {quests.map((group, index) => (
                     <Carousel.Item key={index}>
