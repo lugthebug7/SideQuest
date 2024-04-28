@@ -1,5 +1,4 @@
 .carousel-item {
-    overflow: visible !important;
 
 }
 
@@ -8,7 +7,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    overflow: visible !important;
 }
 
 .quest-container {
@@ -21,14 +19,12 @@
     box-sizing: border-box;
     position: relative;
     border: 3px solid white;
-    overflow: visible !important;
 }
 
 .quest-container:hover {
     z-index: 10;
     border: 3px solid #428673;
     transform: scale(1.1);
-    overflow: visible !important;
 }
 
 .quest-container img {
@@ -104,23 +100,22 @@
     display: none !important;
 }
 
-.modal-backdrop {
+.my-modal-backdrop {
     position: fixed;
     top: 0;
     left: 0;
-    margin-top: 60px;
     width: 100vw;
-    height: calc(100vh - 60px);
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust alpha for desired transparency */
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1050;
 }
 
-.modal-content {
+.my-modal-content {
     display: flex;
-    color: white;      /* Explicitly setting the text color */
+    color: white;
     padding: 20px;
     border-radius: 0.1%;
     border: 1px solid white;
@@ -134,14 +129,13 @@
     background-attachment: fixed;
 }
 
-.modal-content img {
+.my-modal-content img {
     width: 200px;
     height: 200px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
 }
 
 .close-modal-button {

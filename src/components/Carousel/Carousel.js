@@ -35,8 +35,8 @@ function Modal({ show, onClose, item }) {
         return null;
     }
     return ReactDOM.createPortal(
-        <div className="modal-backdrop" onClick={onClose}>
-            <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <div className="my-modal-backdrop" onClick={onClose}>
+            <div className="my-modal-content" onClick={e => e.stopPropagation()}>
 
                 <div className="modal-header">
                     {item.title}
