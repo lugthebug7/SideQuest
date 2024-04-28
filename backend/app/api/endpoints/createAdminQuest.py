@@ -57,6 +57,7 @@ async def create_admin_quest(title: str = Form(...), description: str = Form(...
         decoded_genres = json.loads(genres)
         new_quest = Quests(title=title, description=description, image=safe_filename, user_id=2)
         db.add(new_quest)
+        new_quest.set_objectives(decoded_objectives)
         db.commit()
         for genre_id in decoded_genres:
             quest_genre = QuestGenres(quest_id=new_quest.id, genre_id=genre_id)

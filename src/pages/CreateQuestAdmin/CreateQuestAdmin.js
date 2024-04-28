@@ -27,9 +27,6 @@ function CreateQuestAdmin() {
     event.preventDefault();
 
     try {
-      const title = document.querySelector('input[type="text"]').value;
-      const description = document.querySelector('input[type="text"]').value;
-
       const objectives = [objective1, objective2, objective3, objective4, objective5].filter(obj => obj.trim() !== '');
 
       const genres = [];

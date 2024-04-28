@@ -1,7 +1,14 @@
+.carousel-item {
+    overflow: visible !important;
+
+}
+
+
 .quest-group-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    overflow: visible !important;
 }
 
 .quest-container {
@@ -10,10 +17,18 @@
     margin: 10px;
     height: 200px;
     width: 200px;
+    transition: transform 0.1s;
     box-sizing: border-box;
-    overflow: hidden;
     position: relative;
     border: 3px solid white;
+    overflow: visible !important;
+}
+
+.quest-container:hover {
+    z-index: 10;
+    border: 3px solid #428673;
+    transform: scale(1.1);
+    overflow: visible !important;
 }
 
 .quest-container img {
@@ -24,8 +39,153 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    overflow: visible !important;
 }
 
 .quest-genre-name {
     margin-left: -7%;
 }
+
+
+.detail-panel {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 5%;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #428673;
+    background: rgba(0, 0, 0, 0.77);
+    color: white;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.1s ease-in-out;
+    font-family: 'VT323', monospace;
+    overflow: visible !important;
+}
+
+
+.quest-container:hover .detail-panel {
+    visibility: visible;
+    opacity: 1;
+}
+
+.quest-card-title {
+    font-size: 24px;
+    text-align: center;
+    line-height: 1;
+}
+
+.quest-card-description {
+    font-size: 1em;
+    text-align: center;
+}
+
+.carousel-control-prev {
+    margin-right: 15%;
+    margin-left: -5%;
+    width: 50px;
+}
+
+.carousel-control-next {
+    margin-right: -5%;
+    margin-left: 15%;
+    width: 50px;
+
+}
+
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    width: 75%;
+}
+
+.carousel-indicators {
+    display: none !important;
+}
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-top: 60px;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust alpha for desired transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+}
+
+.modal-content {
+    display: flex;
+    color: white;      /* Explicitly setting the text color */
+    padding: 20px;
+    border-radius: 0.1%;
+    border: 1px solid white;
+    width: 60%;
+    height: 75%;
+
+    font-family: 'VT323', monospace;
+    background-image: url('../../images/jean-background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.modal-content img {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.close-modal-button {
+    display: flex;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 35px;
+    color: black;
+    cursor: pointer;
+    background-color: white;
+}
+
+.close-modal-button:hover {
+    background-color: #428673;
+    color: white;
+}
+
+.modal-body-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    border: 1px solid white;
+}
+
+.modal-body-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    border: 1px solid white;
+}
+
+
+
+
+

@@ -15,7 +15,7 @@ function AppWrapper() {
     return (
         <UserProvider>
             <div className="App">
-                <App />
+                <App/>
             </div>
         </UserProvider>
     );
@@ -25,22 +25,26 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<HomePageLoggedOut />} />
+                <Route path="/" element={<HomePageLoggedOut/>}/>
                 <Route path="/home" element={
                     <ProtectedRoutes>
-                        <NavBar />
-                        <HomePageLoggedIn />
+                        <NavBar/>
+                        <div id="modal-root">
+                            <HomePageLoggedIn/>
+                        </div>
                     </ProtectedRoutes>
-                } />
+                }/>
                 <Route path="/createquestadmin" element={
                     <ProtectedRoutes>
-                        <NavBar />
-                        <CreateQuestAdmin />
+                        <NavBar/>
+                        <CreateQuestAdmin/>
                     </ProtectedRoutes>
-                } />
+                }/>
 
             </Routes>
+
         </BrowserRouter>
+
     );
 }
 

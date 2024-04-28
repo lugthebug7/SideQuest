@@ -5,4 +5,9 @@
     background-position: center;
     background-attachment: fixed;
     height: 100vh;
+    overflow: visible;
+}
+
+.overflowing {
+    overflow: visible !important;
 }
