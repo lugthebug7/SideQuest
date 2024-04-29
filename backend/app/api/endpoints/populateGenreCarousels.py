@@ -43,7 +43,12 @@ async def populate_carousel(genre_request: GenreRequest, db: Session = Depends(g
                 "title": quest.title,
                 "description": quest.description,
                 "image": quest.image if quest.image else None,
-                "genre": genre_name
+                "genre": genre_name,
+                "objective1": quest.objective1 if quest.objective1 else None,
+                "objective2": quest.objective2 if quest.objective2 else None,
+                "objective3": quest.objective3 if quest.objective3 else None,
+                "objective4": quest.objective4 if quest.objective4 else None,
+                "objective5": quest.objective5 if quest.objective5 else None
             }
             quests_data.append(quest_data)
         return {"quests_for_genre": quests_data}

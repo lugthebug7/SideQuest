@@ -62,7 +62,12 @@ class Quests(Base):
                 setattr(self, 'objective' + str(i + 1), objective)
 
     def get_objectives(self):
-        return json.loads(self.objectives) if self.objectives else []
+        objectives = []
+        for i in range(1, 6):
+            objective = getattr(self, 'objective' + str(i))
+            if objective:
+                objectives.append(objective)
+        return objectives
 
 
 class Reviews(Base):

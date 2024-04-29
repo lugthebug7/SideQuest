@@ -31,26 +31,31 @@ const groupQuests = (quests, groupSize) => {
 
 
 function Modal({ show, onClose, item }) {
+
     if (!show) {
         return null;
     }
     return ReactDOM.createPortal(
         <div className="my-modal-backdrop" onClick={onClose}>
             <div className="my-modal-content" onClick={e => e.stopPropagation()}>
-
-                <div className="modal-header">
+                <div className="my-modal-header">
                     {item.title}
                 </div>
-                <div className="modal-body-left">
-                    {item.objectives ? item.objectives.map((objective, index) => (
-                        <div key={index}>
-                            <p>{objective}</p>
-                        </div>
-                    )) : null}
-                </div>
-                <div className="modal-body-right">
-                    <img src={directory + item.image} alt={item.title}/>
-                    <p>{item.description}</p>
+                <div className="my-modal-body-container">
+                    <div className="modal-body-left">
+                        <ul className="objectives-list">
+                            {item.objective1 ? <li>{item.objective1}</li> : null}
+                            {item.objective2 ? <li>{item.objective2}</li> : null}
+                            {item.objective3 ? <li>{item.objective3}</li> : null}
+                            {item.objective4 ? <li>{item.objective4}</li> : null}
+                            {item.objective5 ? <li>{item.objective5}</li> : null}
+                        </ul>
+
+                    </div>
+                    <div className="modal-body-right">
+                        <img src={directory + item.image} alt={item.title}/>
+                        <p>{item.description}</p>
+                    </div>
                 </div>
                 <button className="close-modal-button" onClick={onClose}>X</button>
             </div>
