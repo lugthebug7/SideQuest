@@ -3,10 +3,13 @@
 }
 
 
+
+
 .quest-group-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    overflow-x: auto;
 }
 
 .quest-container {
@@ -82,6 +85,7 @@
     margin-right: 15%;
     margin-left: -5%;
     width: 50px;
+
 }
 
 .carousel-control-next {
@@ -94,6 +98,14 @@
 
 .carousel-control-prev-icon, .carousel-control-next-icon {
     width: 75%;
+}
+
+.carousel-control-prev-icon {
+    margin-right: 50%;
+}
+
+.carousel-control-next-icon {
+    margin-left: 50%;
 }
 
 .carousel-indicators {
@@ -185,7 +197,7 @@
     height: 100%;
 }
 
-.modal-body-right img {
+.modal-body-left img {
     width: 300px;
     height: 300px;
     object-fit: cover;
@@ -193,7 +205,7 @@
     margin-right: 7%;
 }
 
-.modal-body-right p{
+.modal-body-left p{
     margin-top: 8%;
     font-size: 1.35em;
     text-align: center;
@@ -206,6 +218,39 @@
     display: flex;
     width: 100%;
     height: 100%;
+}
+
+.objectives-list {
+    display: flex;
+    flex-direction: column;
+    justify-self: start;
+    align-self: start;
+    font-size: 1.35em;
+    margin-top: 8%;
+    margin-right: 7%;
+    width: 100%;
+    gap: 20px;
+}
+
+.track-quest-button,
+.untrack-quest-button {
+    border-radius: 7px;
+    border: 4px solid black;
+    background: #FFF;
+    color: #000;
+    text-align: center;
+    font-family: 'VT323', monospace;
+    font-size: 1.55em;
+    padding: 7px;
+    cursor: pointer;
+    margin-top: 17%;
+    margin-bottom: 14%;
+}
+
+.track-quest-button:hover,
+.untrack-quest-button:hover {
+    background-color: #428673;
+    color: white;
 }
 
 

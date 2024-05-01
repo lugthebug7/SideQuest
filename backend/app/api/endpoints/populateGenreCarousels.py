@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from ...database import SessionLocal
 from pydantic import BaseModel
 from dotenv import load_dotenv
-from ...models import Quests, Genres, QuestGenres
+from ...models import *
 
 load_dotenv()
 
@@ -14,6 +14,10 @@ router = APIRouter()
 class GenreRequest(BaseModel):
     genre_id: int
 
+
+class UserQuestStatusRequest(BaseModel):
+    username: str
+    quest_id: int
 
 def get_db():
     db = SessionLocal()
@@ -56,5 +60,59 @@ async def populate_carousel(genre_request: GenreRequest, db: Session = Depends(g
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.post("/userstatus")
+async def get_user_quest_status(user_request: UserQuestStatusRequest, db: Session = Depends(get_db)):
+    username = user_request.username
+    quest_id = user_request.quest_id
+    try:
+        user = db.query(Users).filter(
+            Users.username == username
+        ).first()
+        user_quest_status = db.query(QuestsInProgress).filter(QuestsInProgress.user_id == user.id).filter(QuestsInProgress.quest_id == quest_id).first()
+        if user_quest_status:
+            return {"user_quest_status": "in_progress"}
+        else:
+            user_quest_status = db.query(QuestsCompletedBy).filter(QuestsCompletedBy.user_id == user.id).filter(QuestsCompletedBy.quest_id == quest_id).first()
+            if user_quest_status:
+                return {"user_quest_status": "completed"}
+            else:
+                return {"user_quest_status": "not_started"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.post("/track")
+async def mark_as_tracked(user_request: UserQuestStatusRequest, db: Session = Depends(get_db)):
+    try:
+        user = db.query(Users).filter(
+            Users.username == user_request.username
+        ).first()
+        new_status = QuestsInProgress(
+            user_id=user.id,
+            quest_id=user_request.quest_id,
+        )
+        db.add(new_status)
+        db.commit()
+        return {"message": "Quest marked as in progress successfully"}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/untrack")
+async def mark_as_untracked(user_request: UserQuestStatusRequest, db: Session = Depends(get_db)):
+    try:
+        user = db.query(Users).filter(
+            Users.username == user_request.username
+        ).first()
+
+        existing_status = db.query(QuestsInProgress).filter(
+            QuestsInProgress.user_id == user.id,
+            QuestsInProgress.quest_id == user_request.quest_id
+        ).first()
+        db.delete(existing_status)
+        db.commit()
+        return {"message": "Quest Untracked"}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
