@@ -101,7 +101,6 @@ const handleUntrackQuest = async () => {
 
                     </div>
                     <div className="modal-body-right">
-
                         <ul className="objectives-list">
                             {item.objective1 ? <li>{item.objective1}</li> : null}
                             {item.objective2 ? <li>{item.objective2}</li> : null}

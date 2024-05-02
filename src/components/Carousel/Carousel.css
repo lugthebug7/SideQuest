@@ -204,20 +204,20 @@
 }
 
 .modal-body-left img {
-    width: 300px;
-    height: 300px;
+    width: 350px;
+    height: 350px;
     object-fit: cover;
     border: 3px solid white;
     margin-right: 7%;
 }
 
 .modal-body-left p{
-    margin-top: 8%;
+    margin-top: 7%;
     font-size: 1.35em;
     text-align: center;
-    margin-bottom: -5%;
+    margin-bottom: 7%;
     margin-right: 7%;
-    width: 100%;
+    width: 90%;
 }
 
 .my-modal-body-container {
@@ -227,15 +227,24 @@
 }
 
 .objectives-list {
+    background-color: #FCF5D9;
     display: flex;
     flex-direction: column;
-    justify-self: start;
-    align-self: start;
+    justify-self: center;
+    align-self: center;
     font-size: 1.35em;
     margin-top: 8%;
-    margin-right: 7%;
-    width: 100%;
+    margin-right: 3%;
+    width: 90%;
     gap: 20px;
+    border: 1px solid black;
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    color: black;
+    padding-right: 3%;
+    padding-top: 3%;
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25) inset;
 }
 
 .track-quest-button,
@@ -249,8 +258,8 @@
     font-size: 1.55em;
     padding: 7px;
     cursor: pointer;
-    margin-top: 17%;
-    margin-bottom: 14%;
+    margin-top: 10%;
+    margin-bottom: 25%;
 }
 
 .track-quest-button:hover,
