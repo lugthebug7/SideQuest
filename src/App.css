@@ -6,6 +6,9 @@ html, body {
 }
 
 body {
-    background: url('./images/jean-background.png') no-repeat center center fixed;
-    background-size: cover;
+    background:
+        url('./images/jean-background.png') 60% 0% / 500px 500px repeat,
+        linear-gradient(0deg, #FCF5D9 0%, #FCF5D9 100%),
+        url("./images/jean_rotated.png") 100% / cover no-repeat,
+        black;
 }
