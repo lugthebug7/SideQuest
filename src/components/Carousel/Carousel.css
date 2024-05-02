@@ -9,7 +9,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    overflow-x: auto;
 }
 
 .quest-container {
@@ -74,11 +73,18 @@
     font-size: 24px;
     text-align: center;
     line-height: 1;
+    width: 100%;
 }
 
 .quest-card-description {
-    font-size: 1em;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 80%;
     text-align: center;
+    margin-top: auto;
 }
 
 .carousel-control-prev {
