@@ -43,7 +43,7 @@ function CreateQuestAdmin() {
         formData.append('image', image);
 
 
-        const response = await fetch('http://localhost:5001/admincreate/create', {
+        const response = await fetch('http://localhost:5001/adminCreate/create', {
           method: 'POST',
           body: formData
         });

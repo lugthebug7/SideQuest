@@ -116,3 +116,46 @@ async def mark_as_untracked(user_request: UserQuestStatusRequest, db: Session = 
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/complete")
+async def mark_as_completed(user_request: UserQuestStatusRequest, db: Session = Depends(get_db)):
+    try:
+        user = db.query(Users).filter(
+            Users.username == user_request.username
+        ).first()
+        new_status = QuestsCompletedBy(
+            user_id=user.id,
+            quest_id=user_request.quest_id,
+        )
+        db.add(new_status)
+        db.commit()
+        return {"message": "Quest marked as completed successfully"}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/get3FeaturedQuests")
+async def get_3_featured_quests(db: Session = Depends(get_db)):
+    try:
+        quest1 = db.query(Quests).filter(Quests.id == 16).first()
+        quest2 = db.query(Quests).filter(Quests.id == 17).first()
+        quest3 = db.query(Quests).filter(Quests.id == 18).first()
+        quests_data = []
+        for quest in [quest1, quest2, quest3]:
+            quest_data = {
+                "id": quest.id,
+                "title": quest.title,
+                "description": quest.description,
+                "image": quest.image if quest.image else None,
+                "objective1": quest.objective1 if quest.objective1 else None,
+                "objective2": quest.objective2 if quest.objective2 else None,
+                "objective3": quest.objective3 if quest.objective3 else None,
+                "objective4": quest.objective4 if quest.objective4 else None,
+                "objective5": quest.objective5 if quest.objective5 else None
+            }
+            quests_data.append(quest_data)
+        return {"featured_quests": quests_data}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
