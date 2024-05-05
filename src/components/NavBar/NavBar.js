@@ -18,12 +18,9 @@ const Navbar = () => {
         <ul className="nav-menu">
           <li className="nav-item">
             {user?.admin ? (
-            <Link to="/createquestadmin" className="nav-links">admin</Link> ) :
+            <Link to="/createquestadmin" className="nav-links">Create</Link> ) :
             (<Link to="/" className="nav-links">not admin</Link>)
             }
-          </li>
-          <li className="nav-item">
-            <Link to="/about" className="nav-links">Community</Link>
           </li>
         </ul>
       </div>

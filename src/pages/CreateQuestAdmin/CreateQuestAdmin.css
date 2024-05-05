@@ -1,35 +1,51 @@
-.CreateQuestAdmin {
+
+.CreateQuestAdmin form {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    position: relative;
-    background-image: url('../../images/jean-background.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    height: 100vh;
-    margin-left: 10%;
-
+    grid-template-columns: 1fr 1fr 1fr;  /* Three equal columns */
+    gap: 20px;  /* Space between columns */
+    padding: 20px;  /* Padding around the grid */
 }
 
-.title-description-objectives-container {
-  grid-column: 1 / 3;
-  /* Style for the left two-thirds */
+
+.CreateQuestAdmin {
+    width: 100%;  /* Ensure full width */
+    max-width: 1200px;  /* Optional: max width for better control */
+    margin: auto;  /* Centering if needed */
 }
 
-.checkBox {
-    grid-column: 3;
+
+.title-description-objectives-container,
+.genres-container,
+.image-submit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .CreateQuestAdmin {
+        grid-template-columns: 1fr; /* Stack columns vertically on small screens */
+        gap: 10px;
+    }
+}
+
+.objectives {
+    display: flex;
+    font-family: 'VT323', monospace;
+    color: black;
+    font-size: 21px;
+}
+
+
+.genres-container {
+    display: flex;
     font-family: 'VT323', monospace;
     color: white;
     font-size: 21px;
 }
 
-.objectives {
-    font-family: 'VT323', monospace;
-    color: black;
-    font-size: 21px;
 
-}
 
 .checkBox input[type="checkbox"] {
     position: absolute;
@@ -60,7 +76,16 @@ h2 {
     margin-bottom: 20px;
 }
 
-.submit-button {
+.title,
+.description {
+    font-family: 'VT323', monospace;
+    color: black;
+    font-size: 21px;
+
+}
+
+.submit-button,
+.image-button {
     border-radius: 7px;
     border: 4px solid black;
     background: #FFF;
@@ -71,16 +96,43 @@ h2 {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    height: 37px;
+    height: auto;
     width: auto;
-    margin-top: -70px;
-    margin-right: 50px;
 }
 
-.submit-button:hover {
+.submit-button:hover,
+.image-button:hover {
     background: #E0E0E0;
 }
 
-.title {
-    margin-top: 0px;
+
+.image-submit-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
+
+.preview-image {
+    width: 300px;
+    height: 300px;
+    max-height: 300px;
+    object-fit: cover;
+    border: 3px solid black;
+    background-color: #f8f8f8;
+}
+
+.empty-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+    border: 3px solid black;
+    background-color: #FCF5D9;
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25) inset;
+    font-family: 'VT323', monospace;
+    font-size: 2em;
+}
+
+

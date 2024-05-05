@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../../contexts/UserContext';
 import homeImage from "../../images/home_page2.png";
 import NavBar from "../../components/NavBar/NavBar";
 import './CreateQuestAdmin.css';
+
+
 
 
 function CreateQuestAdmin() {
@@ -18,10 +20,27 @@ function CreateQuestAdmin() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
+  const [imageURL, setImageURL] = useState(null);
 
-  const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
-  };
+  useEffect(() => {
+  // This will be called when the component unmounts or when a new image URL is set
+    return () => {
+      if (imageURL) {
+        URL.revokeObjectURL(imageURL);
+      }
+    };
+  }, [imageURL]);
+
+  function handleImageChange(event) {
+      const file = event.target.files[0]; // Get the first file from the file input
+      if (file) {
+          const imageURL = URL.createObjectURL(file);
+          setImageURL(imageURL); // Set the imageURL state
+          setImage(file); // Update the image state with the new file
+      }
+  }
+
+
 
   const handleSubmitClick = async (event) => {
     event.preventDefault();
@@ -66,7 +85,7 @@ function CreateQuestAdmin() {
           <form onSubmit={handleSubmitClick}>
             <div className="title-description-objectives-container">
               <div>
-                <h2 className="title">Title</h2>
+                <h2 className="title-header">Title</h2>
                 <input className="title" type="text" placeholder="Title" value={title}
                        onChange={e => setTitle(e.target.value)}/>
               </div>
@@ -78,7 +97,7 @@ function CreateQuestAdmin() {
               <div className="objectives-container">
                 <h2>Objectives</h2>
                 <div>
-                  <input className="objectives"  type="text" placeholder="Objective 1" value={objective1}
+                  <input className="objectives" type="text" placeholder="Objective 1" value={objective1}
                          onChange={e => setObjective1(e.target.value)}/>
                 </div>
                 <div>
@@ -100,7 +119,8 @@ function CreateQuestAdmin() {
               </div>
             </div>
 
-            <div className="checkBox">
+            <div className="genres-container">
+              <h2>Genres</h2>
               <div>
                 <input type="checkbox" id="1"/>
                 <label htmlFor="1">Stay At Home</label>
@@ -141,11 +161,24 @@ function CreateQuestAdmin() {
                 <input type="checkbox" id="10"/>
                 <label htmlFor="10">Touch Grass</label>
               </div>
+
+              <button className="submit-button" type="submit">Create Quest</button>
+              {error && <p style={{color: 'red'}}>{error}</p>}
             </div>
-            <input className="image" type="file" onChange={handleImageChange} accept="image/*"/>
-            <button className="submit-button" type="submit">Create Quest</button>
+
+            <div className="image-submit-container">
+              {imageURL ? (<img src={imageURL} alt="Selected Quest" className="preview-image"/>) :
+                  (<div className="empty-image">Select Image</div>)}
+              <button type="button" onClick={() => document.getElementById('fileInput').click()}
+                      className="image-button">
+                Choose Image
+              </button>
+              <input type="file" id="fileInput" onChange={handleImageChange} accept="image/*"
+                     style={{display: 'none'}}/>
+              {imageURL && <span>Image Selected</span>}
+            </div>
+
           </form>
-          {error && <p style={{color: 'red'}}>{error}</p>}
         </div>
       </div>
   );
