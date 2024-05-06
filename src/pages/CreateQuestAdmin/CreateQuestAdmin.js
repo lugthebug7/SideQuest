@@ -127,43 +127,43 @@ function CreateQuestAdmin() {
               <h2>Genres</h2>
               <div className="genre">
                 <input type="checkbox" id="1"/>
-                <label htmlFor="1">Stay At Home</label>
+                <label htmlFor="1" className="genre-label">Stay At Home</label>
               </div>
               <div className="genre">
                 <input type="checkbox" id="2"/>
-                <label htmlFor="2">Free Festivities</label>
+                <label htmlFor="2" className="genre-label">Free Festivities</label>
               </div>
               <div className="genre">
                 <input type="checkbox" id="3"/>
-                <label htmlFor="3">Nothing's Free</label>
+                <label htmlFor="3" className="genre-label">Nothing's Free</label>
               </div>
               <div className="genre">
                 <input type="checkbox" id="4"/>
-                <label htmlFor="4">Hungry Hungry Hobbits</label>
+                <label htmlFor="4" className="genre-label">Hungry Hungry Hobbits</label>
               </div>
               <div className="genre">
                 <input type="checkbox" id="5"/>
-                <label htmlFor="5">Adult Adventures</label>
+                <label htmlFor="5" className="genre-label">Adult Adventures</label>
               </div>
               <div className="genre">
                 <input type="checkbox" id="6"/>
-                <label htmlFor="6">For the Lovers</label>
+                <label className="genre-label" htmlFor="6">For the Lovers</label>
               </div>
               <div className="genre">
                 <input type="checkbox" id="7"/>
-                <label htmlFor="7">For the Loners</label>
+                <label htmlFor="7" className="genre-label">For the Loners</label>
               </div>
               <div className="genre">
                 <input type="checkbox" id="8"/>
-                <label htmlFor="8">For the Party Pants</label>
+                <label htmlFor="8" className="genre-label">For the Party Pants</label>
               </div>
               <div className="genre">
                 <input type="checkbox" id="9"/>
-                <label htmlFor="9">Get to Know Your Town</label>
+                <label htmlFor="9" className="genre-label">Get to Know Your Town</label>
               </div>
               <div className="genre">
                 <input type="checkbox" id="10"/>
-                <label htmlFor="10">Touch Grass</label>
+                <label htmlFor="10" className="genre-label">Touch Grass</label>
               </div>
             </div>
 

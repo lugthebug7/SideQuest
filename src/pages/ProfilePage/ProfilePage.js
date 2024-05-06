@@ -10,22 +10,32 @@ import QuestModal from "../../components/QuestModal/QuestModal";
 const directory = "http://localhost:5001/uploads/";
 
 
+function displayProgressQuests() {
+
+}
+
+function displayCompleteQuests() {
+
+}
+
 function ProfilePage() {
-    const [quests, setQuests] = useState([]);
+    const [progressQuests, setProgressQuests] = useState([]);
+    const [completeQuests, setCompleteQuests] = useState([]);
     const { user } = useUser();
-    const navigate = useNavigate();
+    const [activeTab, setActiveTab] = useState('progress');
 
     useEffect(() => {
         const fetchQuests = async () => {
             try {
-                const response = await fetch('http://localhost:5001/populate/getUserQuests', {
+                const response = await fetch('http://localhost:5001/users/getUserQuests', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username: user.username })
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    setQuests(data.user_quests);
+                    setCompleteQuests(data.complete_quests);
+                    setProgressQuests(data.progress_quests);
                 } else {
                     throw new Error('Failed to fetch quests');
                 }
@@ -33,7 +43,6 @@ function ProfilePage() {
                 console.error('Error fetching quests:', error);
             }
         };
-
         fetchQuests();
     }, [user.username]);
 
@@ -41,7 +50,23 @@ function ProfilePage() {
         <div className="profile-page">
             <div className="user-info-container">
             </div>
+
             <div className="user-quests-container">
+                <div className={`progress-button ${activeTab === 'progress' ? 'active' : ''}`}
+                     onClick={() => setActiveTab('progress')}>
+                    In-Progress
+                </div>
+                <div className={`complete-button ${activeTab === 'completed' ? 'active' : ''}`}
+                     onClick={() => setActiveTab('completed')}>
+                    Completed
+                </div>
+                <div className="quest-content">
+                    {activeTab === 'progress' ? (
+                        <div>{progressQuests.map(quest => <div key={quest.id}>{quest.name}</div>)}</div>
+                    ) : (
+                        <div>{completeQuests.map(quest => <div key={quest.id}>{quest.name}</div>)}</div>
+                    )}
+                </div>
             </div>
         </div>
     );
