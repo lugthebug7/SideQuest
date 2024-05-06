@@ -91,8 +91,12 @@ function CreateQuestAdmin() {
               </div>
               <div>
                 <h2>Description</h2>
-                <input className="description" type="text" placeholder="Description" value={description}
-                       onChange={e => setDescription(e.target.value)}/>
+                <textarea className="description"
+                          placeholder="Description"
+                          value={description}
+                          rows="4"
+                          onChange={e => setDescription(e.target.value)}
+                />
               </div>
               <div className="objectives-container">
                 <h2>Objectives</h2>
@@ -121,49 +125,46 @@ function CreateQuestAdmin() {
 
             <div className="genres-container">
               <h2>Genres</h2>
-              <div>
+              <div className="genre">
                 <input type="checkbox" id="1"/>
                 <label htmlFor="1">Stay At Home</label>
               </div>
-              <div>
+              <div className="genre">
                 <input type="checkbox" id="2"/>
                 <label htmlFor="2">Free Festivities</label>
               </div>
-              <div>
+              <div className="genre">
                 <input type="checkbox" id="3"/>
                 <label htmlFor="3">Nothing's Free</label>
               </div>
-              <div>
+              <div className="genre">
                 <input type="checkbox" id="4"/>
                 <label htmlFor="4">Hungry Hungry Hobbits</label>
               </div>
-              <div>
+              <div className="genre">
                 <input type="checkbox" id="5"/>
                 <label htmlFor="5">Adult Adventures</label>
               </div>
-              <div>
+              <div className="genre">
                 <input type="checkbox" id="6"/>
                 <label htmlFor="6">For the Lovers</label>
               </div>
-              <div>
+              <div className="genre">
                 <input type="checkbox" id="7"/>
                 <label htmlFor="7">For the Loners</label>
               </div>
-              <div>
+              <div className="genre">
                 <input type="checkbox" id="8"/>
                 <label htmlFor="8">For the Party Pants</label>
               </div>
-              <div>
+              <div className="genre">
                 <input type="checkbox" id="9"/>
                 <label htmlFor="9">Get to Know Your Town</label>
               </div>
-              <div>
+              <div className="genre">
                 <input type="checkbox" id="10"/>
                 <label htmlFor="10">Touch Grass</label>
               </div>
-
-              <button className="submit-button" type="submit">Create Quest</button>
-              {error && <p style={{color: 'red'}}>{error}</p>}
             </div>
 
             <div className="image-submit-container">
@@ -175,7 +176,9 @@ function CreateQuestAdmin() {
               </button>
               <input type="file" id="fileInput" onChange={handleImageChange} accept="image/*"
                      style={{display: 'none'}}/>
-              {imageURL && <span>Image Selected</span>}
+
+              <button className="submit-button" type="submit">Create Quest</button>
+              {error && <p style={{color: 'red'}}>{error}</p>}
             </div>
 
           </form>

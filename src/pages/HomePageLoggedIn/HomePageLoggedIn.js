@@ -46,6 +46,7 @@ function FeaturedQuest({item, index, username}) {
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
     };
+    console.log(directory + item.image)
 
     return (
 

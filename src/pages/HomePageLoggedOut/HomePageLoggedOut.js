@@ -34,9 +34,10 @@ function HomePageLoggedOut() {
         username: username,
         admin: data.admin,
         accessToken: data.access_token,
+        profilePic: data.profile_pic
       });
 
-      navigate('/home'); // Navigate to home page or dashboard
+      navigate('/home');
     } catch (error) {
       console.error(error.message);
       setError(error.message);

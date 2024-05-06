@@ -96,7 +96,7 @@ async def login(login_request: LoginRequest, response: Response, db: Session = D
         path="/",
     )
 
-    return {"admin": user.admin, "access_token": access_token, "token_type": "bearer"}
+    return {"admin": user.admin, "access_token": access_token, "token_type": "bearer", "profile_pic": user.image}
 
 
 @router.post("/refresh")
