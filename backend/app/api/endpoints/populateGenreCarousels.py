@@ -128,6 +128,11 @@ async def mark_as_completed(user_request: UserQuestStatusRequest, db: Session = 
             user_id=user.id,
             quest_id=user_request.quest_id,
         )
+        existing_status = db.query(QuestsInProgress).filter(
+            QuestsInProgress.user_id == user.id,
+            QuestsInProgress.quest_id == user_request.quest_id
+        ).first()
+        db.delete(existing_status)
         db.add(new_status)
         db.commit()
         return {"message": "Quest marked as completed successfully"}
