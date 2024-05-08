@@ -1,3 +1,5 @@
+
+
 .profile-page {
     display: flex;
     justify-content: space-between;
@@ -19,38 +21,108 @@
     background-color: #FCF5D9;
 }
 
+.quest-container-special {
+    flex: 0 0 auto;
+    margin-left: 40px;
+    margin-right: 40px;
+    height: 225px;
+    width: 225px;
+    transition: transform 0.1s;
+    box-sizing: border-box;
+    position: relative;
+    border: 3px solid white;
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.5);
+}
+
+.quest-container-special:hover {
+    z-index: 10;
+    border: 4px solid #428673;
+    transform: scale(1.1);
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25);
+}
+
+.quest-container-special:hover .detail-panel {
+    visibility: visible;
+    opacity: 1;
+}
+
+.quest-container-special img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: visible !important;
+}
+
+
 .user-quests-container {
     align-items: center;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     border: 3px solid black;
+    overflow-y: auto;
     height: 80vh;
     width: 60vw;
     margin-right: 5vw;
+    margin-top: -4px;
     background-color: #FCF5D9;
+    margin-bottom: -3%;
+    padding-bottom: 50px;
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25) inset;
+    mask-image: linear-gradient(to bottom, transparent, black 1%, black 99%, transparent);
 }
 
-.progress-button {
-    align-self: start;
-    justify-content: center;
-    font-size: 2em;
-    padding-left: 5px;
-    padding-right: 5px;
-    background-color: #E1DBC3;
-    color: black;
-    border: 3px solid black;
-    font-family: 'VT323', monospace;
-    margin-top: -4.6%;
-    margin-left: -3px;
-    height: 6%;
-    cursor: pointer;
-    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25) inset;
+.user-quests-container::before, .user-quests-container::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 20px;
+    pointer-events: none;
+    z-index: 2;
 }
+
+.user-quests-container::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), transparent);
+}
+
+.user-quests-container::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.25), transparent);
+}
+
+.quest-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background-color: #FCF5D9;
+    overflow-y: auto;
+}
+
+.quest-group-container-user {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    height: auto;
+}
+
+
+
+
 
 .progress-button:not(.active):hover {
     filter: brightness(85%);
-    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25);
+    z-index: 1250;
 }
 
 .progress-button.active {
@@ -60,29 +132,15 @@
     border-left: 3px solid black;
     border-right: 3px solid black;
     border-bottom: 0px;
-    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25);
+        z-index: 1250;
  }
 
-.complete-button {
-    align-self: start;
-    justify-content: center;
-    font-size: 2em;
-    padding-left: 5px;
-    padding-right: 5px;
-    background-color: #E1DBC3;
-    color: black;
-    border: 3px solid black;
-    font-family: 'VT323', monospace;
-    margin-top: calc(-6.6% + 0.5px);
-    height: 6%;
-    cursor: pointer;
-    margin-left: 17%;
-        box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25) inset;
-}
 
 .complete-button:not(.active):hover {
-    filter: brightness(85%);
-    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25) inset;
+    filter: brightness(65%);
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25);
+        z-index: 1250;
 }
 
 .complete-button.active {
@@ -92,7 +150,42 @@
     border-left: 3px solid black;
     border-right: 3px solid black;
     border-bottom: 0px;
-    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.25) inset;
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25);
+        z-index: 1250;
 }
 
+.complete-progress-controller-container {
+    display: flex;
+    justify-content: start;
+    width: 35%;
+}
+
+.progress-button, .complete-button {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    width: 40%;
+    font-size: 1.7em;
+    border: 3px solid black;
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25) inset;
+    font-family: 'VT323', monospace;
+    background-color: #006C5A;
+    color: white;
+    margin-bottom: 1px;
+}
+
+.complete-button {
+    margin-left: 15px;
+}
+
+.quest-group-user {
+    display: flex; /* Aligns the quest items within the group horizontally */
+    justify-content: space-between;
+    margin-bottom: 45px;
+    margin-top: -20px;
+}
+
+.entire-quests-section-container {
+    margin-top: -3%;
+}
 
