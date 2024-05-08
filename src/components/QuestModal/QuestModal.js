@@ -30,6 +30,17 @@ function QuestModal({ show, onClose, item, username, fetchStatus }) {
         }
     };
 
+    const handleCompleteQuest = async () => {
+        const response = await fetch('http://localhost:5001/populate/complete', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ username: username, quest_id: item.id })
+        });
+        if (response.ok) {
+            setCompletionStatus(true);
+        }
+    }
+
     useEffect(() => {
         if (show && fetchStatus) {
             const fetchUserQuestStatus = async () => {
@@ -82,7 +93,11 @@ function QuestModal({ show, onClose, item, username, fetchStatus }) {
                             {item.objective5 ? <li>{item.objective5}</li> : null}
                         </ul>
                         {completionStatus ? <button className="completed-quest-button">Completed</button> :
-                            (inProgressStatus ? <button onClick={handleUntrackQuest} className="untrack-quest-button">Untrack Quest</button> :
+                            (inProgressStatus ?
+                                <div className="complete-untrack-buttons-container">
+                                    <button onClick={handleUntrackQuest} className="untrack-quest-button">Untrack Quest</button>
+                                    <button onClick={handleCompleteQuest} className="complete-quest-button">Complete Quest</button>
+                                </div>:
                                 <button onClick={handleTrackQuest} className="track-quest-button">Track Quest</button>)
                         }
                     </div>

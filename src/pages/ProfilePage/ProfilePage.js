@@ -54,13 +54,9 @@ function DisplayQuests(theQuests) {
         }
     });
 
-    if (currentGroup.length > 0) {
-        while (currentGroup.length < 3) {
-            currentGroup.push(...theQuests.slice(0, 3 - currentGroup.length));
-        }
+if (currentGroup.length > 0) {
         fullGroups.push(currentGroup);
     }
-    console.log(user.username)
 
     return (
         <div className="quest-group-container-user">
