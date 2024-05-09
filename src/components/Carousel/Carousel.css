@@ -290,8 +290,11 @@
 }
 
 .complete-untrack-buttons-container {
+    display: flex;
     margin-bottom: 10%;
-    margin-top: 2.9%;
+    margin-top: 0.5%;
+    width: 70%;
+    justify-content: space-between;
 }
 
 

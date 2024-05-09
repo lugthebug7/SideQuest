@@ -11,13 +11,15 @@ const directory = "http://localhost:5001/uploads/";
 const directory1 = "http://localhost:5001/uploads/profilePics/";
 
 
-function UserQuestContainer({item, index, username}) {
+function UserQuestContainer({item, index, username, anyModalOpen, setAnyModalOpen}) {
     const [isHovered, setIsHovered] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
+        setAnyModalOpen(!anyModalOpen);
     };
+
 
     return (
         <div
@@ -35,18 +37,17 @@ function UserQuestContainer({item, index, username}) {
                 </div>
             </ssLink>
             {isModalOpen && (
-                <QuestModal show={isModalOpen} onClose={toggleModal} item={item} username={username} fetchStatus={true} />
+                <QuestModal show={isModalOpen} onClose={toggleModal} item={item} username={username} fetchStatus={true}/>
             )}
         </div>
     );
 }
 
 
-function DisplayQuests(theQuests) {
+function DisplayQuests(theQuests, anyModalOpen, setAnyModalOpen) {
     const fullGroups = [];
     let currentGroup = [];
     const { user } = useUser();
-
     theQuests.forEach((quest, index) => {
         currentGroup.push(quest);
         if ((index + 1) % 3 === 0) {
@@ -64,7 +65,8 @@ if (currentGroup.length > 0) {
             {fullGroups.map((group, index) => (
                 <div key={index} className="quest-group-user">
                     {group.map((quest, index) => (
-                        <UserQuestContainer item={quest} index={index} username={user.username} />
+                        <UserQuestContainer item={quest} index={index} username={user.username}
+                                            anyModalOpen={anyModalOpen} setAnyModalOpen={setAnyModalOpen}/>
                     ))}
                 </div>
             ))}
@@ -74,11 +76,15 @@ if (currentGroup.length > 0) {
 
 
 function ProfilePage() {
+    const [modalOpen, setModalOpen] = useState(false);
     const [progressQuests, setProgressQuests] = useState([]);
     const [completeQuests, setCompleteQuests] = useState([]);
     const [createdQuests, setCreatedQuests] = useState([]);
     const { user } = useUser();
     const [activeTab, setActiveTab] = useState('progress');
+
+    const [anyModalOpen, setAnyModalOpen] = useState(false);
+
     console.log(user.createdQuestsLength)
     useEffect(() => {
         const fetchUserQuests = async () => {
@@ -106,7 +112,7 @@ function ProfilePage() {
             }
         };
         fetchUserQuests();
-    }, [user.username]);
+    }, [user.username, anyModalOpen]);
 
     return (
         <div className="profile-page">
@@ -150,15 +156,15 @@ function ProfilePage() {
                 <div className="user-quests-container">
                     {activeTab === 'progress' ? (
                         <div>{progressQuests.map(quest => <div key={quest.id}>{quest.name}</div>)}
-                            {DisplayQuests(progressQuests)}
+                            {DisplayQuests(progressQuests, anyModalOpen, setAnyModalOpen)}
                         </div>
                     ) : ( activeTab === 'completed' ? (
                             <div>{completeQuests.map(quest => <div key={quest.id}>{quest.name}</div>)}
-                                {DisplayQuests(completeQuests)}
+                                {DisplayQuests(completeQuests, anyModalOpen, setAnyModalOpen)}
                             </div>
                         ) : (
                             <div>{createdQuests.map(quest => <div key={quest.id}>{quest.name}</div>)}
-                                {DisplayQuests(createdQuests)}
+                                {DisplayQuests(createdQuests, anyModalOpen, setAnyModalOpen)}
                             </div>
                         )
                     )}

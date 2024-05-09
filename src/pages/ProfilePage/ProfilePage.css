@@ -132,6 +132,8 @@
     background-color: #006C5A;
     color: white;
     margin-bottom: 1px;
+    border-top-left-radius: 7%;
+    border-top-right-radius: 7%;
 }
 
 .created-button {
