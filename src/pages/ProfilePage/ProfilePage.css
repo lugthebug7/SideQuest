@@ -13,11 +13,12 @@
     flex-direction: column;
     gap: 20px;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     border: 3px solid black;
     height: 80vh;
     width: 20vw;
     margin-left: 5vw;
+    padding-top: 28px;
     background-color: #FCF5D9;
 }
 
@@ -30,7 +31,7 @@
     transition: transform 0.1s;
     box-sizing: border-box;
     position: relative;
-    border: 3px solid white;
+    border: 3px solid black;
     box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.5);
 }
 
@@ -116,53 +117,16 @@
 }
 
 
-
-
-
-.progress-button:not(.active):hover {
-    filter: brightness(85%);
-    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25);
-}
-
-.progress-button.active {
-    color: black;
-    background-color: #FDF9E9;
-    border-top: 3px solid black;
-    border-left: 3px solid black;
-    border-right: 3px solid black;
-    border-bottom: 0px;
-    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25);
- }
-
-
-.complete-button:not(.active):hover {
-    filter: brightness(65%);
-    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25);
-}
-
-.complete-button.active {
-    color: black;
-    background-color: #FDF9E9;
-    border-top: 3px solid black;
-    border-left: 3px solid black;
-    border-right: 3px solid black;
-    border-bottom: 0px;
-    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25);
-}
-
-.complete-progress-controller-container {
-    display: flex;
-    justify-content: start;
-    width: 35%;
-}
-
-.progress-button, .complete-button {
+.progress-button,
+.complete-button,
+.created-button {
     flex: 1;
     text-align: center;
     cursor: pointer;
     width: 40%;
     font-size: 1.7em;
-    border: 3px solid black;
+    border-left: 3px solid black;
+    border-top: 3px solid black;
     box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25) inset;
     font-family: 'VT323', monospace;
     background-color: #006C5A;
@@ -170,9 +134,35 @@
     margin-bottom: 1px;
 }
 
-.complete-button {
-    margin-left: 15px;
+.created-button {
+    border-right: 3px solid black;
 }
+
+.created-button:not(.active):hover,
+.progress-button:not(.active):hover,
+.complete-button:not(.active):hover {
+    filter: brightness(65%);
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25);
+}
+
+
+.progress-button.active,
+.complete-button.active,
+.created-button.active {
+    color: black;
+    background-color: #FDF9E9;
+    border-bottom: 0px;
+    box-shadow: 2px 4px 4px 1px rgba(0, 0, 0, 0.25);
+ }
+
+
+
+.complete-progress-controller-container {
+    display: flex;
+    justify-content: start;
+    width: 35%;
+}
+
 
 .quest-group-user {
     display: flex;
@@ -184,4 +174,63 @@
 .entire-quests-section-container {
     margin-top: -3%;
 }
+
+.profile-picture-container {
+    width: 80%;
+    border: 3px solid black;
+    overflow: hidden;
+}
+
+.profile-picture-container img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.user-completed-count-container,
+.user-inprogress-count-container,
+.user-created-count-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10%;
+    width: 100%;
+    padding: 14px;
+}
+
+
+.user-bio,
+.completed-quests-text,
+.completed-quests-count,
+.inprogress-quests-text,
+.inprogress-quests-count,
+.created-quests-text,
+.created-quests-count {
+    font-family: 'VT323', monospace;
+    color: black;
+}
+
+.user-name {
+    font-family: 'VT323', monospace;
+    color: black;
+    font-size: 2.2em;
+}
+
+.user-bio {
+    padding-left: 14px;
+    padding-right: 14px;
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: -7px;
+}
+
+.completed-quests-text,
+.completed-quests-count,
+.inprogress-quests-text,
+.inprogress-quests-count,
+.created-quests-text,
+.created-quests-count {
+    font-size: 1.8em;
+}
+
 

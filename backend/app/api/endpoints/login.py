@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
 
-from ...models import Users
+from ...models import *
 
 load_dotenv()
 
@@ -71,6 +71,7 @@ def get_user(db: Session, login_request: LoginRequest):
     return user
 
 
+
 @router.post("/")
 async def login(login_request: LoginRequest, response: Response, db: Session = Depends(get_db)):
     user = get_user(db, login_request)
@@ -96,7 +97,8 @@ async def login(login_request: LoginRequest, response: Response, db: Session = D
         path="/",
     )
 
-    return {"admin": user.admin, "access_token": access_token, "token_type": "bearer", "profile_pic": user.image}
+    return {"admin": user.admin, "access_token": access_token, "token_type": "bearer", "profile_pic": user.image,
+            "bio": user.bio}
 
 
 @router.post("/refresh")

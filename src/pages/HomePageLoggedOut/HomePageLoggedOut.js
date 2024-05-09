@@ -30,11 +30,13 @@ function HomePageLoggedOut() {
       console.log('Login successful', data);
 
 
+      console.log(data)
       login({
         username: username,
         admin: data.admin,
         accessToken: data.access_token,
-        profilePic: data.profile_pic
+        profilePic: data.profile_pic,
+        bio: data.bio,
       });
 
       navigate('/home');

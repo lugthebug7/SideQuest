@@ -14,7 +14,7 @@ from typing import List
 import os
 from dotenv import load_dotenv
 
-from ...models import Users, Quests, Genres, QuestGenres
+from ...models import *
 
 load_dotenv()
 
@@ -38,11 +38,11 @@ class QuestRequest(BaseModel):
 
 
 @router.post("/create")
-async def create_admin_quest(title: str = Form(...), description: str = Form(...), objectives: str = Form(...),
+async def create_admin_quest(user_name: str = Form(...), title: str = Form(...), description: str = Form(...), objectives: str = Form(...),
                              genres: str = Form(...), image: UploadFile = File(...), db: Session = Depends(get_db)):
 
     os.makedirs(UPLOAD_DIRECTORY, exist_ok=True)
-
+    user = db.query(Users).filter(Users.username == user_name).first()
     image_data = await image.read()
     image_obj = Image.open(io.BytesIO(image_data))
     if image_obj.mode != 'RGB':
@@ -55,8 +55,11 @@ async def create_admin_quest(title: str = Form(...), description: str = Form(...
     try:
         decoded_objectives = json.loads(objectives)
         decoded_genres = json.loads(genres)
-        new_quest = Quests(title=title, description=description, image=safe_filename, user_id=2)
+        new_quest = Quests(title=title, description=description, image=safe_filename, user_id=user.id)
         db.add(new_quest)
+        db.commit()
+        new_created_by = QuestsCreatedBy(quest_id=new_quest.id, user_id=user.id)
+        db.add(new_created_by)
         new_quest.set_objectives(decoded_objectives)
         db.commit()
         for genre_id in decoded_genres:

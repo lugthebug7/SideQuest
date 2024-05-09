@@ -49,6 +49,14 @@ def get_complete_quests(db: Session, user_id:int):
         all()
     return quests_completed
 
+def get_created_quests(db: Session, user_id:int):
+    quests_created = db.query(Quests). \
+        join(QuestsCreatedBy, Quests.id == QuestsCreatedBy.quest_id). \
+        join(Users, Users.id == QuestsCreatedBy.user_id). \
+        filter(QuestsCreatedBy.user_id == user_id). \
+        all()
+    return quests_created
+
 
 @router.post("/getUserQuests")
 async def get_user_quests(user: UserRequest, db: Session = Depends(get_db)):
@@ -59,11 +67,14 @@ async def get_user_quests(user: UserRequest, db: Session = Depends(get_db)):
         user_id = current_user.id
         progress_quests = get_progress_quests(db, user_id)
         complete_quests = get_complete_quests(db, user_id)
+        created_quests = get_created_quests(db, user_id)
 
         progress_quests_data = [format_quest_data(quest) for quest in progress_quests]
         complete_quests_data = [format_quest_data(quest) for quest in complete_quests]
+        created_quests_data = [format_quest_data(quest) for quest in created_quests]
 
-        return {"complete_quests": complete_quests_data, "progress_quests": progress_quests_data}
+        return {"complete_quests": complete_quests_data, "progress_quests": progress_quests_data,
+                "created_quests": created_quests_data}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

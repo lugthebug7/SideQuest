@@ -21,6 +21,7 @@ function CreateQuestAdmin() {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState('');
   const [imageURL, setImageURL] = useState(null);
+  const{ user } = useUser();
 
   useEffect(() => {
   // This will be called when the component unmounts or when a new image URL is set
@@ -44,7 +45,6 @@ function CreateQuestAdmin() {
 
   const handleSubmitClick = async (event) => {
     event.preventDefault();
-
     try {
       const objectives = [objective1, objective2, objective3, objective4, objective5].filter(obj => obj.trim() !== '');
 
@@ -60,8 +60,9 @@ function CreateQuestAdmin() {
         formData.append('objectives', JSON.stringify(objectives));
         formData.append('genres', JSON.stringify(genres));
         formData.append('image', image);
+        formData.append('user_name', user.username)
 
-
+        console.log(user.username);
         const response = await fetch('http://localhost:5001/adminCreate/create', {
           method: 'POST',
           body: formData

@@ -8,6 +8,7 @@ import groupQuests from "../../components/Carousel/Carousel";
 import ReactDOM from 'react-dom';
 
 const directory = "http://localhost:5001/uploads/";
+const directory1 = "http://localhost:5001/uploads/profilePics/";
 
 
 function UserQuestContainer({item, index, username}) {
@@ -75,9 +76,10 @@ if (currentGroup.length > 0) {
 function ProfilePage() {
     const [progressQuests, setProgressQuests] = useState([]);
     const [completeQuests, setCompleteQuests] = useState([]);
+    const [createdQuests, setCreatedQuests] = useState([]);
     const { user } = useUser();
     const [activeTab, setActiveTab] = useState('progress');
-
+    console.log(user.createdQuestsLength)
     useEffect(() => {
         const fetchUserQuests = async () => {
             if (!user.username) {
@@ -95,6 +97,7 @@ function ProfilePage() {
                     console.log('Data:', data)
                     setCompleteQuests(data.complete_quests);
                     setProgressQuests(data.progress_quests);
+                    setCreatedQuests(data.created_quests);
                 } else {
                     throw new Error('Failed to fetch quests');
                 }
@@ -108,6 +111,26 @@ function ProfilePage() {
     return (
         <div className="profile-page">
             <div className="user-info-container">
+                <div className="profile-picture-container">
+                    <img src={directory1 + user?.profilePic} alt="Profile"/>
+                </div>
+
+                <div className="user-name">{user.username}</div>
+                <div className="user-bio">{user.bio}</div>
+                <div className="user-completed-count-container">
+                    <div className="completed-quests-text">Completed Quests:</div>
+                    <div className="completed-quests-count">{completeQuests.length}</div>
+                </div>
+                <div className="user-inprogress-count-container">
+                    <div className="inprogress-quests-text">In-Progress Quests:</div>
+                    <div className="inprogress-quests-count">{progressQuests.length}</div>
+                </div>
+                <div className="user-created-count-container">
+                    <div className="created-quests-text">Created Quests:</div>
+                    <div className="created-quests-count">{createdQuests.length}</div>
+                </div>
+
+
             </div>
             <div className="entire-quests-section-container">
                 <div className="complete-progress-controller-container">
@@ -119,16 +142,25 @@ function ProfilePage() {
                          onClick={() => setActiveTab('completed')}>
                         Completed
                     </div>
+                    <div className={`created-button ${activeTab === 'created' ? 'active' : ''}`}
+                         onClick={() => setActiveTab('created')}>
+                        Created
+                    </div>
                 </div>
                 <div className="user-quests-container">
                     {activeTab === 'progress' ? (
                         <div>{progressQuests.map(quest => <div key={quest.id}>{quest.name}</div>)}
                             {DisplayQuests(progressQuests)}
                         </div>
-                    ) : (
-                        <div>{completeQuests.map(quest => <div key={quest.id}>{quest.name}</div>)}
-                            {DisplayQuests(completeQuests)}
-                        </div>
+                    ) : ( activeTab === 'completed' ? (
+                            <div>{completeQuests.map(quest => <div key={quest.id}>{quest.name}</div>)}
+                                {DisplayQuests(completeQuests)}
+                            </div>
+                        ) : (
+                            <div>{createdQuests.map(quest => <div key={quest.id}>{quest.name}</div>)}
+                                {DisplayQuests(createdQuests)}
+                            </div>
+                        )
                     )}
                 </div>
             </div>
